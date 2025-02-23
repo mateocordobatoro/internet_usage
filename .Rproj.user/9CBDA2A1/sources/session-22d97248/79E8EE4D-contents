@@ -1,0 +1,67 @@
+# Load required libraries
+library(corrplot)
+library(car)
+library(nortest)
+library(MASS)
+library(lmridge)
+
+
+classify_vif <- function(vif_values) {
+  sapply(vif_values, function(vif) {
+    if (vif < 5) {
+      "No multicollinealidad"
+    } else if (vif >= 5 & vif <= 10) {
+      "Multicolinealidad moderada"
+    } else {
+      "Multicolinealidad Ata"
+    }
+  })
+}
+
+# Function to perform stepwise regression
+stepwise_regression <- function(data, response) {
+  step_forward <- step(lm(as.formula(paste(response, "~ 1")), data = data), direction="forward", scope=as.formula(paste("~", paste(names(data)[names(data) != response], collapse = "+"))))
+  step_backward <- step(lm(as.formula(paste(response, "~ .")), data = data), direction="backward")
+  step_both <- step(lm(as.formula(paste(response, "~ 1")), data = data), direction="both", scope=as.formula(paste("~", paste(names(data)[names(data) != response], collapse = "+"))))
+  
+  print("Stepwise Regression Results:")
+  print(summary(step_both))
+  
+  return(list(forward = step_forward, backward = step_backward, both = step_both))
+}
+
+# Function to check normality of residuals
+check_normality <- function(model) {
+  residuals <- as.numeric(residuals(model))
+  hist(residuals, probability = TRUE, breaks = 12)
+  lines(density(residuals))
+  
+  qqnorm(residuals)
+  qqline(residuals, col = 2)
+  
+  ks_result <- ks.test(residuals, "pnorm", mean(residuals), sd(residuals))
+  lillie_result <- lillie.test(residuals)
+  shapiro_result <- shapiro.test(residuals)
+  
+  print("Normality Tests:")
+  print(paste("Kolmogorov-Smirnov p-value:", ks_result$p.value, ifelse(ks_result$p.value < 0.05, "=> Reject Ho, data is not normal", "=> Fail to reject Ho, data is normal")))
+  print(paste("Lilliefors p-value:", lillie_result$p.value, ifelse(lillie_result$p.value < 0.05, "=> Reject Ho, data is not normal", "=> Fail to reject Ho, data is normal")))
+  print(paste("Shapiro-Wilk p-value:", shapiro_result$p.value, ifelse(shapiro_result$p.value < 0.05, "=> Reject Ho, data is not normal", "=> Fail to reject Ho, data is normal")))
+  
+  return(list(ks = ks_result, lillie = lillie_result, shapiro = shapiro_result))
+}
+
+# Function to check homoscedasticity
+check_homoscedasticity <- function(model, data, response) {
+  residuals <- as.numeric(model$residuals)
+  factor <- cut(data[[response]], breaks = 4, labels = FALSE)
+  
+  bartlett_result <- bartlett.test(residuals ~ factor)
+  
+  print("Homoscedasticity Test:")
+  print(paste("Bartlett p-value:", bartlett_result$p.value, ifelse(bartlett_result$p.value < 0.05, "=> Reject Ho, variances are not equal", "=> Fail to reject Ho, variances are equal")))
+  
+  return(bartlett_result)
+}
+
+

@@ -1,0 +1,1 @@
+"0","abline(h = 4/(length(residuals(vif_model2))), col = ""red"") # Umbral común"

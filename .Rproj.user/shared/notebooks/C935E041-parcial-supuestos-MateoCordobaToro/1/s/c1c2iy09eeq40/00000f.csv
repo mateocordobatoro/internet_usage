@@ -1,0 +1,2 @@
+"0","model1 <- lm(Tiempo~ Ecog + Sexo, data = data)"
+"0","check_normality(model1)"

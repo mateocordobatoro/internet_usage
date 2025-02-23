@@ -1,0 +1,13 @@
+name: internet_usage
+title: internet_usage
+username: matcord
+account: matcord
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 14072733
+bundleId: 9842313
+url: https://matcord.shinyapps.io/internet_usage/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .RData|API_SP.POP.TOTL_DS2_en_csv_v2_76253.csv|internet_usage.csv|internet_usage_analysis.html|internet_usage_analysis.Rmd|internet_usage_analysis_mat.html|internet_usage_analysis_mat.qmd|Metadata_Country_API_SP.POP.TOTL_DS2_en_csv_v2_76253.csv|Metadata_Indicator_API_SP.POP.TOTL_DS2_en_csv_v2_76253.csv|population.csv|production/app.R|production/app2.R|production/app3.R|www/app.R|www/world_map.js|internet_usage_analysis_mat_files

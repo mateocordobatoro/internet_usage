@@ -1,0 +1,306 @@
+## The Internet Gap: Growth, Challenges, and the Future {#title style="font-family: 'Lato', sans-serif;"}
+
+👉 [Click Here to View the Dashboard](your-shiny-app-link) 👈
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+library(dplyr)
+library(highcharter)
+library(forecast)
+library(nls2)
+
+```
+
+```{r}
+#Load dataset
+data <- read.csv("data_long.csv")
+```
+
+The dataset under analysis contains time series data from 2000 to 2023 for 210 countries, representing the percentage of the population with internet access. Internet penetration serves as a key indicator of technological adoption, economic progress, educational advancement, and overall digital inclusion. The increasing access to the internet across the globe is an important phenomenon as it reflects a society's ability to integrate technology into daily life, as well as a country's infrastructure development and policies supporting connectivity.
+
+### Global Internet Usage Trends
+
+The following visualization illustrates the global trend of internet penetration over time. It is evident that internet usage has consistently increased, particularly in the last decade. This growth is largely attributed to advancements in mobile technology, increased affordability of internet services, and governmental initiatives aimed at bridging the digital divide.
+
+```{r, fig.align='center'}
+data %>% 
+  group_by(Year) %>% 
+  summarise(Internet_usage = mean(Internet_usage, na.rm = TRUE)) %>% 
+  hchart('line', hcaes(x =Year, y= Internet_usage))  %>%
+  hc_title(text = "Average % Population Internet Access", style = list(fontFamily = "Lato", fontSize = "18px")) %>%
+  hc_chart(backgroundColor = "#F4F4F4") %>%
+  hc_xAxis(title = list(text = "Year", style = list(fontFamily = "Lato", fontSize = "14px")), lineColor = "#333333") %>%
+  hc_yAxis(title = list(text = "Internet Usage (%)", style = list(fontFamily = "Lato", fontSize = "14px")), gridLineColor = "#D9D9D9") %>%
+  hc_legend(itemStyle = list(fontFamily = "Lato", fontSize = "12px", color = "#333333")) %>%
+  hc_colors(c("#E31A1C","#1F78B4", "#33A02C", "#FF7F00", "#6A3D9A", "#B15928"))
+
+```
+
+### Analyzing Variations in Internet Penetration
+
+While the overall trend suggests significant growth, some countries have experienced fluctuations in internet usage. Notably, historically high-penetration nations such as Australia, the United States, Switzerland, and the UK have encountered periods of decline. These downturns can be attributed to several factors:
+
+-   Economic Challenges: Countries facing economic crises may see reduced investments in technological infrastructure.
+
+-   Governmental Policies: Regulations limiting internet access or disruptions due to political changes can impact penetration rates.
+
+-   Population Migration: Shifts in demographics, particularly in urban versus rural populations, may affect internet adoption levels.
+
+-   Natural Disasters and Conflicts: Events like earthquakes, conflicts, or other crises can lead to declines in access.
+
+```{r}
+decreasing_countries <- data %>%
+  group_by(country_name) %>%
+  arrange(Year) %>%
+  mutate(change = Internet_usage - lag(Internet_usage)) %>%
+  filter(change < 0) %>%
+  pull(country_name) %>%
+  unique()
+
+decreasing_countries_count <- length(decreasing_countries)
+```
+
+A total of `r decreasing_countries_count` countries experienced declines in internet penetration at some point between 2000 and 2023.
+
+### Top 10 Countries with Highest Internet Penetration (2023)
+
+```{r, fig.align='center'}
+
+data %>% 
+  filter(country_name %in% (data %>%
+                              filter(Year == 2023) %>%
+                              arrange(desc(Internet_usage)) %>%
+                              head(10))$country_name) %>% 
+  hchart('line', hcaes(x= Year, y = Internet_usage, group = country_name)) %>%
+  hc_title(text = "Countries with Highest Internet Penetration", style = list(fontFamily = "Lato", fontSize = "18px")) %>%
+  hc_chart(backgroundColor = "#F4F4F4") %>%
+  hc_xAxis(title = list(text = "Year", style = list(fontFamily = "Lato", fontSize = "14px")), lineColor = "#333333") %>%
+  hc_yAxis(title = list(text = "Internet Usage (%)", style = list(fontFamily = "Lato", fontSize = "14px")), gridLineColor = "#D9D9D9") %>%
+  hc_legend(itemStyle = list(fontFamily = "Lato", fontSize = "12px", color = "#333333")) %>%
+  hc_colors(c("#E31A1C","#1F78B4", "#33A02C", "#FF7F00", "#6A3D9A", "#B15928"))
+
+
+```
+
+Observations:
+
+Middle Eastern nations, including Bahrain, Saudi Arabia, and the UAE, dominate the top rankings with nearly 100% internet penetration.
+
+European countries such as Luxembourg, Norway, and Switzerland also appear among the leaders.
+
+The absence of the United States and the UK may be due to factors such as rural-urban divides, disparities in broadband access, or differing methodologies in data reporting.
+
+### Bottom 10 Countries with Lowest Internet Penetration (2023)
+
+Despite global progress, certain countries continue to struggle with widespread internet access.
+
+```{r, fig.align='center'}
+
+data %>% 
+  filter(country_name %in% (data %>%
+                              filter(Year == 2023) %>%
+                              arrange(Internet_usage) %>%
+                              head(10))$country_name) %>% 
+  hchart('line', hcaes(x= Year, y = Internet_usage, group = country_name)) %>%
+  hc_title(text = "Countries with Lowest Internet Penetration", style = list(fontFamily = "Lato", fontSize = "18px")) %>%
+  hc_chart(backgroundColor = "#F4F4F4") %>%
+  hc_xAxis(title = list(text = "Year", style = list(fontFamily = "Lato", fontSize = "14px")), lineColor = "#333333") %>%
+  hc_yAxis(title = list(text = "Internet Usage (%)", style = list(fontFamily = "Lato", fontSize = "14px")), gridLineColor = "#D9D9D9") %>%
+  hc_legend(itemStyle = list(fontFamily = "Lato", fontSize = "12px", color = "#333333")) %>%
+  hc_colors(c("#E31A1C","#1F78B4", "#33A02C", "#FF7F00", "#6A3D9A", "#B15928"))
+
+
+```
+
+Countries such as Malawi, Bangladesh, Indonesia, and Ecuador exhibit some of the lowest internet penetration rates.
+
+China, despite its technological advancements, ranks lower due to its vast rural population where digital access remains a challenge.
+
+Several Latin American countries, including Mexico and Paraguay, still face significant accessibility barriers.
+
+### Patterns Among the Top and Bottom 10 Countries
+
+Top 10 Countries: Exhibit a concave growth pattern, where rapid early adoption led to saturation in later years. Bottom 10 Countries: Show a convex growth pattern, characterized by slower initial adoption followed by accelerated growth as infrastructure improved.
+
+### When Will We Reach 100% Internet Access? A Forecasting Analysis
+
+```{r}
+
+# Identify early adopter countries (those with >40% penetration in 2000)
+early_adopter_countries <- data %>% 
+  filter(Year == 2000, Internet_usage > 40) %>% 
+  pull(country_code)
+
+# Compute weighted internet penetration for early adopters
+early_adopters <- data %>%
+  filter(country_code %in% early_adopter_countries) %>% 
+  group_by(Year) %>%
+  summarise(
+    weighted_avg = sum(Internet_usage * population) / sum(population)
+  )
+
+# Compute weighted internet penetration for late adopters
+late_adopters <- data %>%
+  filter(!(country_code %in% early_adopter_countries)) %>% 
+  group_by(Year) %>%
+  summarise(
+    weighted_avg = sum(Internet_usage * population) / sum(population)
+  )
+
+# Create Highcharter visualization
+highchart() %>%
+  hc_title(text = "Internet Penetration: Early vs. Late Adopters") %>%
+  hc_xAxis(title = list(text = "Year")) %>%
+  hc_yAxis(title = list(text = "Weighted Internet Penetration (%)"), max = 100) %>%
+  
+  # Early Adopters Line
+  hc_add_series(data = early_adopters, type = "line", hcaes(x = Year, y = weighted_avg),
+                name = "Early Adopters (>40% in 2000)", color = "#1F78B4") %>%
+  
+  # Late Adopters Line
+  hc_add_series(data = late_adopters, type = "line", hcaes(x = Year, y = weighted_avg),
+                name = "Late Adopters (<40% in 2000)", color = "#E31A1C", dashStyle = "Dash") %>%
+  
+  # Tooltip customization
+  hc_tooltip(shared = TRUE, valueDecimals = 2)
+
+ 
+
+```
+
+For this estimation, we set specific conditions to ensure an accurate and meaningful prediction. We separated countries that had internet penetration rates above 40% in the year 2000 to differentiate between early adopters and late adopters.
+
+Additionally, we used a weighted average approach, giving more importance to countries with larger populations, ensuring that the global penetration trend is not biased by smaller nations. This method provides a more accurate representation of real-world adoption.
+
+The comparison between early adopters and late adopters reveals distinct patterns in internet penetration growth. Early adopters, which had over 40% penetration in 2000, experienced a rapid initial surge in adoption, followed by a plateau as penetration neared saturation levels. In contrast, late adopters—those with less than 40% penetration in 2000—followed a slower, steadier growth trajectory. Their adoption rates increased gradually over the years, with a modest acceleration in the last decade, likely driven by factors such as mobile internet expansion, cheaper smartphones, and global digital inclusion efforts.
+
+However, unlike early adopters, who experienced a clear S-curve pattern, late adopters faced persistent barriers—including infrastructure limitations, affordability issues, and regulatory challenges—that kept their growth relatively constrained. This suggests that, for many late-adopting nations, the process of expanding internet access has been a long, incremental journey rather than a rapid transformation, reinforcing the reality that overcoming the digital divide takes decades of sustained effort.
+
+```{r}
+
+# Definir función logística con límite en 100%
+logistic_function <- function(Year, xmid, scal) {
+  100 / (1 + exp(-scal * (Year - xmid)))
+}
+
+
+prediction_log <- function(data){
+  
+
+# Aggregating data to calculate global average per year
+global_trend <- data %>%
+  rename(Internet_usage = weighted_avg)
+
+
+# Encontrar valores iniciales para los parámetros
+xmid_init <- median(global_trend$Year)  # Punto de inflexión en la mitad de los datos
+scal_init <- 0.1  # Velocidad de crecimiento, un valor pequeño para evitar errores
+
+# Ajustar el modelo logístico
+logistic_model <- nls(Internet_usage ~ logistic_function(Year, xmid, scal), 
+                      data = global_trend, 
+                      start = list(xmid = xmid_init, scal = scal_init))
+
+# Predecir valores futuros
+future_years <- data.frame(Year = seq(min(global_trend$Year), 2060, by = 1))
+future_predictions <- predict(logistic_model, newdata = future_years)
+
+# Truncar predicciones a un máximo de 100%
+future_predictions <- pmin(future_predictions, 100)
+
+# Crear dataframe con predicciones
+forecast_df <- data.frame(Year = future_years$Year, Internet_usage = future_predictions)
+
+
+return(forecast_df)
+  
+}
+
+
+early_pred <- prediction_log(early_adopters)
+late_pred <- prediction_log(late_adopters)
+
+
+
+```
+
+```{r}
+
+
+
+# Encontrar el primer año donde la penetración llega al 100%
+early_pred_year_100 <- min(early_pred$Year[early_pred$Internet_usage >= 99.5]) # 99.5% para mayor estabilidad
+late_pred_year_100  <- min(late_pred$Year[late_pred$Internet_usage >= 99.5]) # 99.5% para mayor estabilidad
+
+# Crear marcador en el punto donde se alcanza el 100%
+early_pred_marker_point <- early_pred %>% filter(Year == early_pred_year_100)
+late_pred_marker_point <- late_pred  %>% filter(Year == late_pred_year_100)
+
+# Graficar en Highcharter
+highchart() %>%
+  hc_title(text = "Forecast of Global Internet Penetration (Logistic Growth)") %>%
+  hc_xAxis(title = list(text = "Year")) %>%
+  hc_yAxis(title = list(text = "Internet Usage (%)"), max = 100) %>%
+
+  # Datos observados
+  hc_add_series(data = early_adopters %>% rename(Internet_usage = weighted_avg), type = "line", hcaes(x = Year, y = Internet_usage),
+                name = "Observed Data early adopters", color = "#1F78B4") %>%
+  hc_add_series(data = late_adopters %>% rename(Internet_usage = weighted_avg) %>% filter(Year <= 2023), type = "line", hcaes(x = Year, y = Internet_usage),
+                name = "Observed Data late adopters", color = "#1F78B4") %>% 
+  
+
+  # Datos pronosticados (línea punteada)
+  hc_add_series(data = early_pred %>% filter(Year > 2023), type = "line", hcaes(x = Year, y = Internet_usage),
+                name = "Forecast -  early adopters", dashStyle = "Dash", color = "#E31A1C") %>%
+  hc_add_series(data = late_pred %>% filter(Year > 2023), type = "line", hcaes(x = Year, y = Internet_usage),
+                name = "Forecast - late adopters", dashStyle = "Dash", color = "#E31A1C") %>%
+  
+  # # Línea vertical donde empieza el pronóstico
+  # hc_add_series(data = list(list(x = min(forecast_df$Year), y = 0),
+  #                           list(x = min(forecast_df$Year), y = 100)),
+  #               type = "line", name = "Forecast Start", color = "black", dashStyle = "Dot",
+  #               enableMouseTracking = FALSE, marker = list(enabled = FALSE)) %>%
+
+  # Punto verde en el primer año donde se alcanza el 100%
+  hc_add_series(data = list(list(x = early_pred_marker_point$Year, y = early_pred_marker_point$Internet_usage)),
+                type = "scatter", name = "100% Internet Access - early adopters", color = "green",
+                marker = list(symbol = "circle", radius = 6)) %>% 
+  hc_add_series(data = list(list(x = late_pred_marker_point$Year, y = late_pred_marker_point$Internet_usage)),
+                type = "scatter", name = "100% Internet Access - late adopters", color = "darkgreen",
+                marker = list(symbol = "circle", radius = 6)) 
+
+
+
+```
+
+Our analysis separates internet adoption trends into two groups: early adopters and late adopters. The distinction is necessary because these groups exhibit different adoption behaviors that impact long-term projections.
+
+**Why Two Models?**
+
+Our analysis differentiates between early adopters and late adopters because their internet adoption patterns follow distinct trajectories. Early adopters benefited from better infrastructure, economic growth, and technological accessibility, allowing them to reach high penetration levels more quickly. In contrast, late adopters have faced slower adoption rates due to challenges such as limited infrastructure, affordability constraints, and restrictive policies. Using a logistic growth model, we estimate that early adopters will reach 99.5% penetration by 2046, while late adopters will achieve the same level by 2052. Although this difference is not substantial, it underscores the increasing difficulty of expanding internet access to the last 0.5% of the population. Reaching full global penetration remains a significant challenge due to persistent geographic, economic, and political barriers that slow the final stages of connectivity.
+
+**Factors Influencing the Adoption Curve**
+
+-   **Infrastructure & Cost:**
+
+    Urban areas reached high penetration quickly due to fiber-optic and broadband expansions. Rural & remote regions still face high infrastructure costs (fiber-optic installation, satellite access). New solutions like low-orbit satellites (e.g., Starlink) can accelerate adoption, but affordability remains a concern.
+
+-   **Regulation & Government Control:**
+
+    Some countries limit access due to political concerns, slowing adoption in certain regions. Policy-driven initiatives (e.g., subsidies for internet access, regulatory reforms) will determine the speed of further expansion.
+
+-   **Affordability & Digital Literacy:**
+
+    Expanding access does not guarantee usage—many people cannot afford devices or lack digital literacy. Mobile internet and affordable smartphones have helped, but further education and pricing policies are needed.
+
+**How Our Model Compares to Official Projections**
+
+United Nations (ITU): Estimates 66% global penetration in 2023 and anticipates major challenges in reaching the last 10-15%.
+
+World Bank & UN Projections: Suggest universal access by 2060 (assuming steady investments).
+
+Our Model: Forecasts near-universal access by 2052 for late adopters, slightly ahead of these estimates but aligned with current trends.
+
+**What Could Accelerate or Delay Full Internet Access?**
+
+Several factors could either accelerate or delay the path to full global internet penetration. On the acceleration side, declining mobile internet costs, continuous advancements in satellite technology, and proactive government policies aimed at digital inclusion could significantly speed up adoption. However, certain obstacles remain, including political restrictions that limit access in some regions, economic downturns that may reduce infrastructure investments, and persistent gaps in digital literacy and affordability that hinder widespread usage. While the world is on course to reach 99.5% internet penetration, achieving 100% connectivity remains uncertain. Geographic isolation, financial constraints, and regulatory barriers may prevent complete global coverage. Nonetheless, as internet access becomes a necessity rather than a luxury, the digital divide will continue to narrow over time.

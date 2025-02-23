@@ -1,0 +1,2 @@
+"0","cooksd2 <- cooks.distance(vif_model2)"
+"0","plot(cooksd2, type = ""h"")"

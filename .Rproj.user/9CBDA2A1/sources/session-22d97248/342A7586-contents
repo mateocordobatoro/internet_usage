@@ -1,0 +1,23 @@
+library(car)
+
+
+cor_matrix <- cor(data)
+print(cor_matrix)
+
+# Variance Inflation Factor (VIF)
+vif_model <- lm(Tiempo ~ ., data = data) # Replace 'y' with your dependent variable
+vif_values <- car::vif(vif_model)
+print(vif_values)
+
+
+if(vif_values < 5){
+  "No multicolinealidad"
+}else{}
+
+Interpretation of VIF
+VIF < 5: No serious multicollinearity.
+VIF 5-10: Moderate multicollinearity.
+VIF > 10: High multicollinearity, consider removing or transforming variables.
+
+
+

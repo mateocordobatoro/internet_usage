@@ -1,0 +1,97 @@
+
+
+data <- data %>%
+  pivot_longer(cols = -c(`Country Name`,`Country Code`), 
+               names_to = "Year", values_to = "Internet_usage") %>% 
+  rename(country_name = `Country Name`,
+         country_code= `Country Code`)
+
+ pop <- population %>% 
+   pivot_longer(cols = -c(country_name, country_code),
+                names_to = "Year",
+                values_to = 'population') 
+ 
+ pop$Year <- as.numeric(gsub("X","", pop$Year))
+ 
+ 
+ head(pop)
+ 
+ pop <- pop %>% filter(!is.na(population)) 
+ 
+ 
+ 
+ 
+ 
+ 
+ data <- data %>% 
+   left_join(pop %>% select(country_code, Year, population), by = c('country_code','Year')) 
+ 
+ 
+ 
+ head(data)
+ 
+ 
+ write.csv(data, "data_long.csv")
+ 
+ data %>% 
+   group_by(Year) %>% 
+   mutate(pop_total = sum(X2023))
+ 
+ 
+  c <- data %>% 
+    filter(Year == 2000, Internet_usage > 40) %>% 
+    pull(country_code)
+ 
+early_adopters <- data %>%
+   filter(country_code %in% c) %>% 
+   group_by(Year) %>%
+   summarise(
+     weighted_avg = sum(Internet_usage * population) / sum(population)
+   ) 
+
+lately_adopter <- data %>%
+  filter(!(country_code %in% c)) %>% 
+  group_by(Year) %>%
+  summarise(
+    weighted_avg = sum(Internet_usage * population) / sum(population)
+  ) 
+
+
+
+# Identify early adopter countries (those with >40% penetration in 2000)
+early_adopter_countries <- data %>% 
+  filter(Year == 2000, Internet_usage > 40) %>% 
+  pull(country_code)
+
+# Compute weighted internet penetration for early adopters
+early_adopters <- data %>%
+  filter(country_code %in% early_adopter_countries) %>% 
+  group_by(Year) %>%
+  summarise(
+    weighted_avg = sum(Internet_usage * population) / sum(population)
+  )
+
+# Compute weighted internet penetration for late adopters
+late_adopters <- data %>%
+  filter(!(country_code %in% early_adopter_countries)) %>% 
+  group_by(Year) %>%
+  summarise(
+    weighted_avg = sum(Internet_usage * population) / sum(population)
+  )
+
+# Create Highcharter visualization
+highchart() %>%
+  hc_title(text = "Internet Penetration: Early vs. Late Adopters") %>%
+  hc_xAxis(title = list(text = "Year")) %>%
+  hc_yAxis(title = list(text = "Weighted Internet Penetration (%)"), max = 100) %>%
+  
+  # Early Adopters Line
+  hc_add_series(data = early_adopters, type = "line", hcaes(x = Year, y = weighted_avg),
+                name = "Early Adopters (>40% in 2000)", color = "#1F78B4") %>%
+  
+  # Late Adopters Line
+  hc_add_series(data = late_adopters, type = "line", hcaes(x = Year, y = weighted_avg),
+                name = "Late Adopters (<40% in 2000)", color = "#E31A1C", dashStyle = "Dash") %>%
+  
+  # Tooltip customization
+  hc_tooltip(shared = TRUE, valueDecimals = 2)

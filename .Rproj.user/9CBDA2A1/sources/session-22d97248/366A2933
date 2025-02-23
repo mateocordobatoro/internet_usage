@@ -1,0 +1,27 @@
+{
+    "id": "366A2933",
+    "path": "~/MateoDS/internet_usage/app.R",
+    "project_path": "app.R",
+    "type": "r_source",
+    "hash": "1200881087",
+    "contents": "",
+    "dirty": false,
+    "created": 1739725122299.0,
+    "source_on_save": false,
+    "relative_order": 6,
+    "properties": {
+        "tempName": "Untitled2",
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "58,17",
+        "scrollLine": "39"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1740303767,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1740303767,
+    "read_only": false,
+    "read_only_alternatives": []
+}

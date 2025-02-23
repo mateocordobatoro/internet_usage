@@ -1,0 +1,125 @@
+---
+title: "Exploratory Data Analysis (EDA) - Internet Usage Trends"
+author: "Data Analyst"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(ggplot2)
+library(DT)
+library(highcharter)
+```
+
+```{r}
+#Load dataset
+data <- read.csv("data_long.csv")
+```
+
+The dataset under analysis contains time series data from 2000 to 2023 for 210 countries, representing the percentage of the population with internet access. Internet penetration serves as a key indicator of technological adoption, economic progress, educational advancement, and overall digital inclusion. The increasing access to the internet across the globe is an important phenomenon as it reflects a society's ability to integrate technology into daily life, as well as a country's infrastructure development and policies supporting connectivity.
+
+### Global Internet Usage Trends
+
+The following visualization illustrates the global trend of internet penetration over time. It is evident that internet usage has consistently increased, particularly in the last decade. This growth is largely attributed to advancements in mobile technology, increased affordability of internet services, and governmental initiatives aimed at bridging the digital divide.
+
+```{r, fig.align='center'}
+data %>% 
+  group_by(Year) %>% 
+  summarise(Internet_usage = mean(Internet_usage, na.rm = TRUE)) %>% 
+  hchart('line', hcaes(x =Year, y= Internet_usage))  %>%
+  hc_title(text = "Average % Population Internet Access", style = list(fontFamily = "Lato", fontSize = "18px")) %>%
+  hc_chart(backgroundColor = "#F4F4F4") %>%
+  hc_xAxis(title = list(text = "Year", style = list(fontFamily = "Lato", fontSize = "14px")), lineColor = "#333333") %>%
+  hc_yAxis(title = list(text = "Internet Usage (%)", style = list(fontFamily = "Lato", fontSize = "14px")), gridLineColor = "#D9D9D9") %>%
+  hc_legend(itemStyle = list(fontFamily = "Lato", fontSize = "12px", color = "#333333")) %>%
+  hc_colors(c("#E31A1C","#1F78B4", "#33A02C", "#FF7F00", "#6A3D9A", "#B15928"))
+
+```
+
+### Analyzing Variations in Internet Penetration
+
+While the overall trend suggests significant growth, some countries have experienced fluctuations in internet usage. Notably, historically high-penetration nations such as Australia, the United States, Switzerland, and the UK have encountered periods of decline. These downturns can be attributed to several factors:
+
+-   Economic Challenges: Countries facing economic crises may see reduced investments in technological infrastructure.
+
+-   Governmental Policies: Regulations limiting internet access or disruptions due to political changes can impact penetration rates.
+
+-   Population Migration: Shifts in demographics, particularly in urban versus rural populations, may affect internet adoption levels.
+
+-   Natural Disasters and Conflicts: Events like earthquakes, conflicts, or other crises can lead to declines in access.
+
+```{r}
+decreasing_countries <- data %>%
+  group_by(country_name) %>%
+  arrange(Year) %>%
+  mutate(change = Internet_usage - lag(Internet_usage)) %>%
+  filter(change < 0) %>%
+  pull(country_name) %>%
+  unique()
+
+decreasing_countries_count <- length(decreasing_countries)
+```
+
+A total of `r decreasing_countries_count` countries experienced declines in internet penetration at some point between 2000 and 2023.
+
+### Top 10 Countries with Highest Internet Penetration (2023)
+
+```{r, fig.align='center'}
+
+data %>% 
+  filter(country_name %in% (data %>%
+                              filter(Year == 2023) %>%
+                              arrange(desc(Internet_usage)) %>%
+                              head(10))$country_name) %>% 
+  hchart('line', hcaes(x= Year, y = Internet_usage, group = country_name)) %>%
+  hc_title(text = "Countries with Highest Internet Penetration", style = list(fontFamily = "Lato", fontSize = "18px")) %>%
+  hc_chart(backgroundColor = "#F4F4F4") %>%
+  hc_xAxis(title = list(text = "Year", style = list(fontFamily = "Lato", fontSize = "14px")), lineColor = "#333333") %>%
+  hc_yAxis(title = list(text = "Internet Usage (%)", style = list(fontFamily = "Lato", fontSize = "14px")), gridLineColor = "#D9D9D9") %>%
+  hc_legend(itemStyle = list(fontFamily = "Lato", fontSize = "12px", color = "#333333")) %>%
+  hc_colors(c("#E31A1C","#1F78B4", "#33A02C", "#FF7F00", "#6A3D9A", "#B15928"))
+
+
+```
+
+Observations:
+
+Middle Eastern nations, including Bahrain, Saudi Arabia, and the UAE, dominate the top rankings with nearly 100% internet penetration.
+
+European countries such as Luxembourg, Norway, and Switzerland also appear among the leaders.
+
+The absence of the United States and the UK may be due to factors such as rural-urban divides, disparities in broadband access, or differing methodologies in data reporting.
+
+### Bottom 10 Countries with Lowest Internet Penetration (2023)
+
+Despite global progress, certain countries continue to struggle with widespread internet access.
+
+```{r, fig.align='center'}
+
+data %>% 
+  filter(country_name %in% (data %>%
+                              filter(Year == 2023) %>%
+                              arrange(Internet_usage) %>%
+                              head(10))$country_name) %>% 
+  hchart('line', hcaes(x= Year, y = Internet_usage, group = country_name)) %>%
+  hc_title(text = "Countries with Lowest Internet Penetration", style = list(fontFamily = "Lato", fontSize = "18px")) %>%
+  hc_chart(backgroundColor = "#F4F4F4") %>%
+  hc_xAxis(title = list(text = "Year", style = list(fontFamily = "Lato", fontSize = "14px")), lineColor = "#333333") %>%
+  hc_yAxis(title = list(text = "Internet Usage (%)", style = list(fontFamily = "Lato", fontSize = "14px")), gridLineColor = "#D9D9D9") %>%
+  hc_legend(itemStyle = list(fontFamily = "Lato", fontSize = "12px", color = "#333333")) %>%
+  hc_colors(c("#E31A1C","#1F78B4", "#33A02C", "#FF7F00", "#6A3D9A", "#B15928"))
+
+
+```
+
+Countries such as Malawi, Bangladesh, Indonesia, and Ecuador exhibit some of the lowest internet penetration rates.
+
+China, despite its technological advancements, ranks lower due to its vast rural population where digital access remains a challenge.
+
+Several Latin American countries, including Mexico and Paraguay, still face significant accessibility barriers.
+
+### Patterns Among the Top and Bottom 10 Countries
+
+Top 10 Countries: Exhibit a concave growth pattern, where rapid early adoption led to saturation in later years. Bottom 10 Countries: Show a convex growth pattern, characterized by slower initial adoption followed by accelerated growth as infrastructure improved.

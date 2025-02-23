@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>internet_usage_analysis_mat</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="internet_usage_analysis_mat_files/libs/clipboard/clipboard.min.js"></script>
+<script src="internet_usage_analysis_mat_files/libs/quarto-html/quarto.js"></script>
+<script src="internet_usage_analysis_mat_files/libs/quarto-html/popper.min.js"></script>
+<script src="internet_usage_analysis_mat_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="internet_usage_analysis_mat_files/libs/quarto-html/anchor.min.js"></script>
+<link href="internet_usage_analysis_mat_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="internet_usage_analysis_mat_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="internet_usage_analysis_mat_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="internet_usage_analysis_mat_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="internet_usage_analysis_mat_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="internet_usage_analysis_mat_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/jquery-3.5.1/jquery.min.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/proj4js-2.3.15/proj4.js"></script>
+
+<link href="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/css/motion.css" rel="stylesheet">
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/highcharts.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/highcharts-3d.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/highcharts-more.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/modules/stock.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/modules/map.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/modules/data.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/modules/exporting.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/modules/offline-exporting.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/modules/drilldown.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/modules/item-series.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/modules/overlapping-datalabels.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/modules/annotations.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/modules/export-data.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/modules/funnel.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/modules/heatmap.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/modules/treemap.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/modules/sankey.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/modules/dependency-wheel.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/modules/organization.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/modules/solid-gauge.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/modules/streamgraph.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/modules/sunburst.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/modules/vector.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/modules/wordcloud.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/modules/xrange.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/modules/tilemap.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/modules/venn.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/modules/gantt.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/modules/timeline.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/modules/parallel-coordinates.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/modules/bullet.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/modules/coloraxis.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/modules/dumbbell.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/modules/lollipop.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/modules/series-label.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/plugins/motion.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/custom/reset.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highcharts-9.3.1/modules/boost.js"></script>
+
+<script src="internet_usage_analysis_mat_files/libs/highchart-binding-0.9.4/highchart.js"></script>
+
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+
+<section id="title" class="level2" style="font-family: 'Lato', sans-serif;">
+<h2 style="font-family: 'Lato', sans-serif;" class="anchored" data-anchor-id="title">The Internet Gap: Growth, Challenges, and the Future</h2>
+<p>👉 <a href="your-shiny-app-link">Click Here to View the Dashboard</a> 👈</p>
+<p>The dataset under analysis contains time series data from 2000 to 2023 for 210 countries, representing the percentage of the population with internet access. Internet penetration serves as a key indicator of technological adoption, economic progress, educational advancement, and overall digital inclusion. The increasing access to the internet across the globe is an important phenomenon as it reflects a society’s ability to integrate technology into daily life, as well as a country’s infrastructure development and policies supporting connectivity.</p>
+<section id="global-internet-usage-trends" class="level3">
+<h3 class="anchored" data-anchor-id="global-internet-usage-trends">Global Internet Usage Trends</h3>
+<p>The following visualization illustrates the global trend of internet penetration over time. It is evident that internet usage has consistently increased, particularly in the last decade. This growth is largely attributed to advancements in mobile technology, increased affordability of internet services, and governmental initiatives aimed at bridging the digital divide.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="highchart html-widget html-fill-item" id="htmlwidget-56f425bd812ef6cd3a2a" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-56f425bd812ef6cd3a2a">{"x":{"hc_opts":{"chart":{"reflow":true,"backgroundColor":"#F4F4F4"},"title":{"text":"Average % Population Internet Access","style":{"fontFamily":"Lato","fontSize":"18px"}},"yAxis":{"title":{"text":"Internet Usage (%)","style":{"fontFamily":"Lato","fontSize":"14px"}},"type":"linear","gridLineColor":"#D9D9D9"},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}}},"series":[{"group":"group","data":[{"Year":2000,"Internet_usage":8.732304462806123,"x":2000,"y":8.732304462806123},{"Year":2001,"Internet_usage":10.65385696809045,"x":2001,"y":10.65385696809045},{"Year":2002,"Internet_usage":13.61763048509901,"x":2002,"y":13.61763048509901},{"Year":2003,"Internet_usage":16.10808512295919,"x":2003,"y":16.10808512295919},{"Year":2004,"Internet_usage":18.52015133919598,"x":2004,"y":18.52015133919598},{"Year":2005,"Internet_usage":20.7991001385,"x":2005,"y":20.7991001385},{"Year":2006,"Internet_usage":23.37999164824121,"x":2006,"y":23.37999164824121},{"Year":2007,"Internet_usage":25.59703662745098,"x":2007,"y":25.59703662745098},{"Year":2008,"Internet_usage":28.5133247029703,"x":2008,"y":28.5133247029703},{"Year":2009,"Internet_usage":31.23800242574258,"x":2009,"y":31.23800242574258},{"Year":2010,"Internet_usage":34.32057512437811,"x":2010,"y":34.32057512437811},{"Year":2011,"Internet_usage":37.05403784313725,"x":2011,"y":37.05403784313725},{"Year":2012,"Internet_usage":39.77862861386139,"x":2012,"y":39.77862861386139},{"Year":2013,"Internet_usage":42.13829512437811,"x":2013,"y":42.13829512437811},{"Year":2014,"Internet_usage":45.21101825870647,"x":2014,"y":45.21101825870647},{"Year":2015,"Internet_usage":48.0346208,"x":2015,"y":48.0346208},{"Year":2016,"Internet_usage":51.38965197044335,"x":2016,"y":51.38965197044335},{"Year":2017,"Internet_usage":54.66493737864078,"x":2017,"y":54.66493737864078},{"Year":2018,"Internet_usage":57.86378863636364,"x":2018,"y":57.86378863636364},{"Year":2019,"Internet_usage":61.25028126392473,"x":2019,"y":61.25028126392473},{"Year":2020,"Internet_usage":64.49231988114583,"x":2020,"y":64.49231988114583},{"Year":2021,"Internet_usage":67.88072044368421,"x":2021,"y":67.88072044368421},{"Year":2022,"Internet_usage":71.29170327868853,"x":2022,"y":71.29170327868853},{"Year":2023,"Internet_usage":87.66674576271187,"x":2023,"y":87.66674576271187}],"type":"line"}],"xAxis":{"type":"linear","title":{"text":"Year","style":{"fontFamily":"Lato","fontSize":"14px"}},"lineColor":"#333333"},"legend":{"itemStyle":{"fontFamily":"Lato","fontSize":"12px","color":"#333333"}},"colors":["#E31A1C","#1F78B4","#33A02C","#FF7F00","#6A3D9A","#B15928"]},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":"Lato","debug":false},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="analyzing-variations-in-internet-penetration" class="level3">
+<h3 class="anchored" data-anchor-id="analyzing-variations-in-internet-penetration">Analyzing Variations in Internet Penetration</h3>
+<p>While the overall trend suggests significant growth, some countries have experienced fluctuations in internet usage. Notably, historically high-penetration nations such as Australia, the United States, Switzerland, and the UK have encountered periods of decline. These downturns can be attributed to several factors:</p>
+<ul>
+<li><p>Economic Challenges: Countries facing economic crises may see reduced investments in technological infrastructure.</p></li>
+<li><p>Governmental Policies: Regulations limiting internet access or disruptions due to political changes can impact penetration rates.</p></li>
+<li><p>Population Migration: Shifts in demographics, particularly in urban versus rural populations, may affect internet adoption levels.</p></li>
+<li><p>Natural Disasters and Conflicts: Events like earthquakes, conflicts, or other crises can lead to declines in access.</p></li>
+</ul>
+<p>A total of 118 countries experienced declines in internet penetration at some point between 2000 and 2023.</p>
+</section>
+<section id="top-10-countries-with-highest-internet-penetration-2023" class="level3">
+<h3 class="anchored" data-anchor-id="top-10-countries-with-highest-internet-penetration-2023">Top 10 Countries with Highest Internet Penetration (2023)</h3>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="highchart html-widget html-fill-item" id="htmlwidget-57e006d266f6d0b44853" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-57e006d266f6d0b44853">{"x":{"hc_opts":{"chart":{"reflow":true,"backgroundColor":"#F4F4F4"},"title":{"text":"Countries with Highest Internet Penetration","style":{"fontFamily":"Lato","fontSize":"18px"}},"yAxis":{"title":{"text":"Internet Usage (%)","style":{"fontFamily":"Lato","fontSize":"14px"}},"type":"linear","gridLineColor":"#D9D9D9"},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":true},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}}},"series":[{"name":"Bahrain","data":[{"X":288,"country_name":"Bahrain","country_code":"BHR","Year":2000,"Internet_usage":6.15373,"population":637582,"x":2000,"y":6.15373},{"X":289,"country_name":"Bahrain","country_code":"BHR","Year":2001,"Internet_usage":15.0386,"population":661316,"x":2001,"y":15.0386},{"X":290,"country_name":"Bahrain","country_code":"BHR","Year":2002,"Internet_usage":18.0507,"population":710553,"x":2002,"y":18.0507},{"X":291,"country_name":"Bahrain","country_code":"BHR","Year":2003,"Internet_usage":21.5549,"population":764517,"x":2003,"y":21.5549},{"X":292,"country_name":"Bahrain","country_code":"BHR","Year":2004,"Internet_usage":21.4587,"population":823741,"x":2004,"y":21.4587},{"X":293,"country_name":"Bahrain","country_code":"BHR","Year":2005,"Internet_usage":21.3037,"population":888822,"x":2005,"y":21.3037},{"X":294,"country_name":"Bahrain","country_code":"BHR","Year":2006,"Internet_usage":28.244,"population":960424,"x":2006,"y":28.244},{"X":295,"country_name":"Bahrain","country_code":"BHR","Year":2007,"Internet_usage":32.91,"population":1039295,"x":2007,"y":32.91},{"X":296,"country_name":"Bahrain","country_code":"BHR","Year":2008,"Internet_usage":51.95,"population":1103496,"x":2008,"y":51.95},{"X":297,"country_name":"Bahrain","country_code":"BHR","Year":2009,"Internet_usage":53,"population":1178415,"x":2009,"y":53},{"X":298,"country_name":"Bahrain","country_code":"BHR","Year":2010,"Internet_usage":55,"population":1228543,"x":2010,"y":55},{"X":299,"country_name":"Bahrain","country_code":"BHR","Year":2011,"Internet_usage":77,"population":1195020,"x":2011,"y":77},{"X":300,"country_name":"Bahrain","country_code":"BHR","Year":2012,"Internet_usage":88,"population":1208964,"x":2012,"y":88},{"X":301,"country_name":"Bahrain","country_code":"BHR","Year":2013,"Internet_usage":90,"population":1253191,"x":2013,"y":90},{"X":302,"country_name":"Bahrain","country_code":"BHR","Year":2014,"Internet_usage":90.5031,"population":1314562,"x":2014,"y":90.5031},{"X":303,"country_name":"Bahrain","country_code":"BHR","Year":2015,"Internet_usage":93.4783,"population":1370322,"x":2015,"y":93.4783},{"X":304,"country_name":"Bahrain","country_code":"BHR","Year":2016,"Internet_usage":98,"population":1423726,"x":2016,"y":98},{"X":305,"country_name":"Bahrain","country_code":"BHR","Year":2017,"Internet_usage":95.8781,"population":1501116,"x":2017,"y":95.8781},{"X":306,"country_name":"Bahrain","country_code":"BHR","Year":2018,"Internet_usage":98.6447,"population":1503091,"x":2018,"y":98.6447},{"X":307,"country_name":"Bahrain","country_code":"BHR","Year":2019,"Internet_usage":99.7015,"population":1483756,"x":2019,"y":99.7015},{"X":308,"country_name":"Bahrain","country_code":"BHR","Year":2020,"Internet_usage":99.67100000000001,"population":1472204,"x":2020,"y":99.67100000000001},{"X":309,"country_name":"Bahrain","country_code":"BHR","Year":2021,"Internet_usage":100,"population":1504365,"x":2021,"y":100},{"X":310,"country_name":"Bahrain","country_code":"BHR","Year":2022,"Internet_usage":100,"population":1524693,"x":2022,"y":100},{"X":311,"country_name":"Bahrain","country_code":"BHR","Year":2023,"Internet_usage":100,"population":1577059,"x":2023,"y":100}],"type":"line"},{"name":"Denmark","data":[{"X":1112,"country_name":"Denmark","country_code":"DNK","Year":2000,"Internet_usage":39.1724,"population":5339616,"x":2000,"y":39.1724},{"X":1113,"country_name":"Denmark","country_code":"DNK","Year":2001,"Internet_usage":42.9575,"population":5358783,"x":2001,"y":42.9575},{"X":1114,"country_name":"Denmark","country_code":"DNK","Year":2002,"Internet_usage":64.25,"population":5375931,"x":2002,"y":64.25},{"X":1115,"country_name":"Denmark","country_code":"DNK","Year":2003,"Internet_usage":76.26000000000001,"population":5390574,"x":2003,"y":76.26000000000001},{"X":1116,"country_name":"Denmark","country_code":"DNK","Year":2004,"Internet_usage":80.93000000000001,"population":5404523,"x":2004,"y":80.93000000000001},{"X":1117,"country_name":"Denmark","country_code":"DNK","Year":2005,"Internet_usage":82.73999999999999,"population":5419432,"x":2005,"y":82.73999999999999},{"X":1118,"country_name":"Denmark","country_code":"DNK","Year":2006,"Internet_usage":86.65000000000001,"population":5437272,"x":2006,"y":86.65000000000001},{"X":1119,"country_name":"Denmark","country_code":"DNK","Year":2007,"Internet_usage":85.03,"population":5461438,"x":2007,"y":85.03},{"X":1120,"country_name":"Denmark","country_code":"DNK","Year":2008,"Internet_usage":85.02,"population":5493621,"x":2008,"y":85.02},{"X":1121,"country_name":"Denmark","country_code":"DNK","Year":2009,"Internet_usage":86.84,"population":5523095,"x":2009,"y":86.84},{"X":1122,"country_name":"Denmark","country_code":"DNK","Year":2010,"Internet_usage":88.72,"population":5547683,"x":2010,"y":88.72},{"X":1123,"country_name":"Denmark","country_code":"DNK","Year":2011,"Internet_usage":89.81,"population":5570572,"x":2011,"y":89.81},{"X":1124,"country_name":"Denmark","country_code":"DNK","Year":2012,"Internet_usage":92.26000000000001,"population":5591572,"x":2012,"y":92.26000000000001},{"X":1125,"country_name":"Denmark","country_code":"DNK","Year":2013,"Internet_usage":94.6297,"population":5614932,"x":2013,"y":94.6297},{"X":1126,"country_name":"Denmark","country_code":"DNK","Year":2014,"Internet_usage":95.9935,"population":5643475,"x":2014,"y":95.9935},{"X":1127,"country_name":"Denmark","country_code":"DNK","Year":2015,"Internet_usage":96.3305,"population":5683483,"x":2015,"y":96.3305},{"X":1128,"country_name":"Denmark","country_code":"DNK","Year":2016,"Internet_usage":96.9678,"population":5728010,"x":2016,"y":96.9678},{"X":1129,"country_name":"Denmark","country_code":"DNK","Year":2017,"Internet_usage":97.0994,"population":5764980,"x":2017,"y":97.0994},{"X":1130,"country_name":"Denmark","country_code":"DNK","Year":2018,"Internet_usage":97.3192,"population":5793636,"x":2018,"y":97.3192},{"X":1131,"country_name":"Denmark","country_code":"DNK","Year":2019,"Internet_usage":98.04640000000001,"population":5814422,"x":2019,"y":98.04640000000001},{"X":1132,"country_name":"Denmark","country_code":"DNK","Year":2020,"Internet_usage":96.5491,"population":5831404,"x":2020,"y":96.5491},{"X":1133,"country_name":"Denmark","country_code":"DNK","Year":2021,"Internet_usage":98.8659,"population":5856733,"x":2021,"y":98.8659},{"X":1134,"country_name":"Denmark","country_code":"DNK","Year":2022,"Internet_usage":97.8601,"population":5903037,"x":2022,"y":97.8601},{"X":1135,"country_name":"Denmark","country_code":"DNK","Year":2023,"Internet_usage":98.7756,"population":5946952,"x":2023,"y":98.7756}],"type":"line"},{"name":"Korea, Rep.","data":[{"X":2226,"country_name":"Korea, Rep.","country_code":"KOR","Year":2000,"Internet_usage":44.7,"population":47008111,"x":2000,"y":44.7},{"X":2227,"country_name":"Korea, Rep.","country_code":"KOR","Year":2001,"Internet_usage":56.6,"population":47370164,"x":2001,"y":56.6},{"X":2228,"country_name":"Korea, Rep.","country_code":"KOR","Year":2002,"Internet_usage":59.4,"population":47644736,"x":2002,"y":59.4},{"X":2229,"country_name":"Korea, Rep.","country_code":"KOR","Year":2003,"Internet_usage":65.5,"population":47892330,"x":2003,"y":65.5},{"X":2230,"country_name":"Korea, Rep.","country_code":"KOR","Year":2004,"Internet_usage":72.7,"population":48082519,"x":2004,"y":72.7},{"X":2231,"country_name":"Korea, Rep.","country_code":"KOR","Year":2005,"Internet_usage":73.5,"population":48184561,"x":2005,"y":73.5},{"X":2232,"country_name":"Korea, Rep.","country_code":"KOR","Year":2006,"Internet_usage":78.09999999999999,"population":48438292,"x":2006,"y":78.09999999999999},{"X":2233,"country_name":"Korea, Rep.","country_code":"KOR","Year":2007,"Internet_usage":78.8,"population":48683638,"x":2007,"y":78.8},{"X":2234,"country_name":"Korea, Rep.","country_code":"KOR","Year":2008,"Internet_usage":81,"population":49054708,"x":2008,"y":81},{"X":2235,"country_name":"Korea, Rep.","country_code":"KOR","Year":2009,"Internet_usage":81.59999999999999,"population":49307835,"x":2009,"y":81.59999999999999},{"X":2236,"country_name":"Korea, Rep.","country_code":"KOR","Year":2010,"Internet_usage":83.7,"population":49554112,"x":2010,"y":83.7},{"X":2237,"country_name":"Korea, Rep.","country_code":"KOR","Year":2011,"Internet_usage":83.7591,"population":49936638,"x":2011,"y":83.7591},{"X":2238,"country_name":"Korea, Rep.","country_code":"KOR","Year":2012,"Internet_usage":84.06999999999999,"population":50199853,"x":2012,"y":84.06999999999999},{"X":2239,"country_name":"Korea, Rep.","country_code":"KOR","Year":2013,"Internet_usage":84.77,"population":50428893,"x":2013,"y":84.77},{"X":2240,"country_name":"Korea, Rep.","country_code":"KOR","Year":2014,"Internet_usage":87.5568,"population":50746659,"x":2014,"y":87.5568},{"X":2241,"country_name":"Korea, Rep.","country_code":"KOR","Year":2015,"Internet_usage":89.8963,"population":51014947,"x":2015,"y":89.8963},{"X":2242,"country_name":"Korea, Rep.","country_code":"KOR","Year":2016,"Internet_usage":92.843,"population":51217803,"x":2016,"y":92.843},{"X":2243,"country_name":"Korea, Rep.","country_code":"KOR","Year":2017,"Internet_usage":95.0694,"population":51361911,"x":2017,"y":95.0694},{"X":2244,"country_name":"Korea, Rep.","country_code":"KOR","Year":2018,"Internet_usage":96.02290000000001,"population":51585058,"x":2018,"y":96.02290000000001},{"X":2245,"country_name":"Korea, Rep.","country_code":"KOR","Year":2019,"Internet_usage":96.1576,"population":51764822,"x":2019,"y":96.1576},{"X":2246,"country_name":"Korea, Rep.","country_code":"KOR","Year":2020,"Internet_usage":96.5051,"population":51836239,"x":2020,"y":96.5051},{"X":2247,"country_name":"Korea, Rep.","country_code":"KOR","Year":2021,"Internet_usage":97.57129999999999,"population":51769539,"x":2021,"y":97.57129999999999},{"X":2248,"country_name":"Korea, Rep.","country_code":"KOR","Year":2022,"Internet_usage":97.1686,"population":51672569,"x":2022,"y":97.1686},{"X":2249,"country_name":"Korea, Rep.","country_code":"KOR","Year":2023,"Internet_usage":97.416,"population":51712619,"x":2023,"y":97.416}],"type":"line"},{"name":"Kuwait","data":[{"X":2252,"country_name":"Kuwait","country_code":"KWT","Year":2000,"Internet_usage":6.7314,"population":1954709,"x":2000,"y":6.7314},{"X":2253,"country_name":"Kuwait","country_code":"KWT","Year":2001,"Internet_usage":8.55179,"population":2008121,"x":2001,"y":8.55179},{"X":2254,"country_name":"Kuwait","country_code":"KWT","Year":2002,"Internet_usage":10.249,"population":2059974,"x":2002,"y":10.249},{"X":2255,"country_name":"Kuwait","country_code":"KWT","Year":2003,"Internet_usage":22.4029,"population":2109881,"x":2003,"y":22.4029},{"X":2256,"country_name":"Kuwait","country_code":"KWT","Year":2004,"Internet_usage":22.9271,"population":2157320,"x":2004,"y":22.9271},{"X":2257,"country_name":"Kuwait","country_code":"KWT","Year":2005,"Internet_usage":25.9261,"population":2236788,"x":2005,"y":25.9261},{"X":2258,"country_name":"Kuwait","country_code":"KWT","Year":2006,"Internet_usage":28.7912,"population":2364733,"x":2006,"y":28.7912},{"X":2259,"country_name":"Kuwait","country_code":"KWT","Year":2007,"Internet_usage":34.8,"population":2507887,"x":2007,"y":34.8},{"X":2260,"country_name":"Kuwait","country_code":"KWT","Year":2008,"Internet_usage":42,"population":2651421,"x":2008,"y":42},{"X":2261,"country_name":"Kuwait","country_code":"KWT","Year":2009,"Internet_usage":50.8,"population":2795484,"x":2009,"y":50.8},{"X":2262,"country_name":"Kuwait","country_code":"KWT","Year":2010,"Internet_usage":61.4,"population":2943372,"x":2010,"y":61.4},{"X":2263,"country_name":"Kuwait","country_code":"KWT","Year":2011,"Internet_usage":65.76909999999999,"population":3132814,"x":2011,"y":65.76909999999999},{"X":2264,"country_name":"Kuwait","country_code":"KWT","Year":2012,"Internet_usage":70.45,"population":3337109,"x":2012,"y":70.45},{"X":2265,"country_name":"Kuwait","country_code":"KWT","Year":2013,"Internet_usage":75.45999999999999,"population":3507844,"x":2013,"y":75.45999999999999},{"X":2266,"country_name":"Kuwait","country_code":"KWT","Year":2014,"Internet_usage":78.7,"population":3665876,"x":2014,"y":78.7},{"X":2267,"country_name":"Kuwait","country_code":"KWT","Year":2015,"Internet_usage":82,"population":3834574,"x":2015,"y":82},{"X":2268,"country_name":"Kuwait","country_code":"KWT","Year":2016,"Internet_usage":85.59999999999999,"population":4004096,"x":2016,"y":85.59999999999999},{"X":2269,"country_name":"Kuwait","country_code":"KWT","Year":2017,"Internet_usage":98,"population":4154812,"x":2017,"y":98},{"X":2270,"country_name":"Kuwait","country_code":"KWT","Year":2018,"Internet_usage":99.5988,"population":4323515,"x":2018,"y":99.5988},{"X":2271,"country_name":"Kuwait","country_code":"KWT","Year":2019,"Internet_usage":99.5427,"population":4442316,"x":2019,"y":99.5427},{"X":2272,"country_name":"Kuwait","country_code":"KWT","Year":2020,"Internet_usage":99.10590000000001,"population":4400267,"x":2020,"y":99.10590000000001},{"X":2273,"country_name":"Kuwait","country_code":"KWT","Year":2021,"Internet_usage":99.7,"population":4360865,"x":2021,"y":99.7},{"X":2274,"country_name":"Kuwait","country_code":"KWT","Year":2022,"Internet_usage":99.8436,"population":4589643,"x":2022,"y":99.8436},{"X":2275,"country_name":"Kuwait","country_code":"KWT","Year":2023,"Internet_usage":99.7473,"population":4853420,"x":2023,"y":99.7473}],"type":"line"},{"name":"Luxembourg","data":[{"X":2477,"country_name":"Luxembourg","country_code":"LUX","Year":2000,"Internet_usage":22.8873,"population":436300,"x":2000,"y":22.8873},{"X":2478,"country_name":"Luxembourg","country_code":"LUX","Year":2001,"Internet_usage":36.1634,"population":441525,"x":2001,"y":36.1634},{"X":2479,"country_name":"Luxembourg","country_code":"LUX","Year":2002,"Internet_usage":39.84,"population":446175,"x":2002,"y":39.84},{"X":2480,"country_name":"Luxembourg","country_code":"LUX","Year":2003,"Internet_usage":54.55,"population":451630,"x":2003,"y":54.55},{"X":2481,"country_name":"Luxembourg","country_code":"LUX","Year":2004,"Internet_usage":65.88,"population":458095,"x":2004,"y":65.88},{"X":2482,"country_name":"Luxembourg","country_code":"LUX","Year":2005,"Internet_usage":70,"population":465158,"x":2005,"y":70},{"X":2483,"country_name":"Luxembourg","country_code":"LUX","Year":2006,"Internet_usage":72.51000000000001,"population":472637,"x":2006,"y":72.51000000000001},{"X":2484,"country_name":"Luxembourg","country_code":"LUX","Year":2007,"Internet_usage":78.92,"population":479993,"x":2007,"y":78.92},{"X":2485,"country_name":"Luxembourg","country_code":"LUX","Year":2008,"Internet_usage":82.23,"population":488650,"x":2008,"y":82.23},{"X":2486,"country_name":"Luxembourg","country_code":"LUX","Year":2009,"Internet_usage":87.31,"population":497783,"x":2009,"y":87.31},{"X":2487,"country_name":"Luxembourg","country_code":"LUX","Year":2010,"Internet_usage":90.62,"population":506953,"x":2010,"y":90.62},{"X":2488,"country_name":"Luxembourg","country_code":"LUX","Year":2011,"Internet_usage":90.0299,"population":518347,"x":2011,"y":90.0299},{"X":2489,"country_name":"Luxembourg","country_code":"LUX","Year":2012,"Internet_usage":91.9499,"population":530946,"x":2012,"y":91.9499},{"X":2490,"country_name":"Luxembourg","country_code":"LUX","Year":2013,"Internet_usage":93.7765,"population":543360,"x":2013,"y":93.7765},{"X":2491,"country_name":"Luxembourg","country_code":"LUX","Year":2014,"Internet_usage":94.67019999999999,"population":556319,"x":2014,"y":94.67019999999999},{"X":2492,"country_name":"Luxembourg","country_code":"LUX","Year":2015,"Internet_usage":96.3767,"population":569604,"x":2015,"y":96.3767},{"X":2493,"country_name":"Luxembourg","country_code":"LUX","Year":2016,"Internet_usage":98.1367,"population":582014,"x":2016,"y":98.1367},{"X":2494,"country_name":"Luxembourg","country_code":"LUX","Year":2017,"Internet_usage":97.363,"population":596336,"x":2017,"y":97.363},{"X":2495,"country_name":"Luxembourg","country_code":"LUX","Year":2018,"Internet_usage":97.0613,"population":607950,"x":2018,"y":97.0613},{"X":2496,"country_name":"Luxembourg","country_code":"LUX","Year":2019,"Internet_usage":97.1206,"population":620001,"x":2019,"y":97.1206},{"X":2497,"country_name":"Luxembourg","country_code":"LUX","Year":2020,"Internet_usage":98.45959999999999,"population":630419,"x":2020,"y":98.45959999999999},{"X":2498,"country_name":"Luxembourg","country_code":"LUX","Year":2021,"Internet_usage":98.6609,"population":640064,"x":2021,"y":98.6609},{"X":2499,"country_name":"Luxembourg","country_code":"LUX","Year":2022,"Internet_usage":98.242,"population":653103,"x":2022,"y":98.242},{"X":2500,"country_name":"Luxembourg","country_code":"LUX","Year":2023,"Internet_usage":99.3479,"population":666430,"x":2023,"y":99.3479}],"type":"line"},{"name":"Malaysia","data":[{"X":2571,"country_name":"Malaysia","country_code":"MYS","Year":2000,"Internet_usage":21.3847,"population":22967816,"x":2000,"y":21.3847},{"X":2572,"country_name":"Malaysia","country_code":"MYS","Year":2001,"Internet_usage":26.696,"population":23526538,"x":2001,"y":26.696},{"X":2573,"country_name":"Malaysia","country_code":"MYS","Year":2002,"Internet_usage":32.3382,"population":24102477,"x":2002,"y":32.3382},{"X":2574,"country_name":"Malaysia","country_code":"MYS","Year":2003,"Internet_usage":34.9712,"population":24679602,"x":2003,"y":34.9712},{"X":2575,"country_name":"Malaysia","country_code":"MYS","Year":2004,"Internet_usage":42.2523,"population":25256772,"x":2004,"y":42.2523},{"X":2576,"country_name":"Malaysia","country_code":"MYS","Year":2005,"Internet_usage":48.6292,"population":25836071,"x":2005,"y":48.6292},{"X":2577,"country_name":"Malaysia","country_code":"MYS","Year":2006,"Internet_usage":51.638,"population":26417909,"x":2006,"y":51.638},{"X":2578,"country_name":"Malaysia","country_code":"MYS","Year":2007,"Internet_usage":55.7,"population":26998389,"x":2007,"y":55.7},{"X":2579,"country_name":"Malaysia","country_code":"MYS","Year":2008,"Internet_usage":55.8,"population":27570059,"x":2008,"y":55.8},{"X":2580,"country_name":"Malaysia","country_code":"MYS","Year":2009,"Internet_usage":55.9,"population":28124778,"x":2009,"y":55.9},{"X":2581,"country_name":"Malaysia","country_code":"MYS","Year":2010,"Internet_usage":56.3,"population":28655776,"x":2010,"y":56.3},{"X":2582,"country_name":"Malaysia","country_code":"MYS","Year":2011,"Internet_usage":61,"population":29162039,"x":2011,"y":61},{"X":2583,"country_name":"Malaysia","country_code":"MYS","Year":2012,"Internet_usage":65.8,"population":29662831,"x":2012,"y":65.8},{"X":2584,"country_name":"Malaysia","country_code":"MYS","Year":2013,"Internet_usage":57.0575,"population":30174265,"x":2013,"y":57.0575},{"X":2585,"country_name":"Malaysia","country_code":"MYS","Year":2014,"Internet_usage":63.6654,"population":30696137,"x":2014,"y":63.6654},{"X":2586,"country_name":"Malaysia","country_code":"MYS","Year":2015,"Internet_usage":71.0641,"population":31232798,"x":2015,"y":71.0641},{"X":2587,"country_name":"Malaysia","country_code":"MYS","Year":2016,"Internet_usage":78.78830000000001,"population":31789685,"x":2016,"y":78.78830000000001},{"X":2588,"country_name":"Malaysia","country_code":"MYS","Year":2017,"Internet_usage":80.1405,"population":32355644,"x":2017,"y":80.1405},{"X":2589,"country_name":"Malaysia","country_code":"MYS","Year":2018,"Internet_usage":81.20099999999999,"population":32910967,"x":2018,"y":81.20099999999999},{"X":2590,"country_name":"Malaysia","country_code":"MYS","Year":2019,"Internet_usage":84.1871,"population":33440596,"x":2019,"y":84.1871},{"X":2591,"country_name":"Malaysia","country_code":"MYS","Year":2020,"Internet_usage":89.55500000000001,"population":33889558,"x":2020,"y":89.55500000000001},{"X":2592,"country_name":"Malaysia","country_code":"MYS","Year":2021,"Internet_usage":96.7514,"population":34282399,"x":2021,"y":96.7514},{"X":2593,"country_name":"Malaysia","country_code":"MYS","Year":2022,"Internet_usage":97.3986,"population":34695493,"x":2022,"y":97.3986},{"X":2594,"country_name":"Malaysia","country_code":"MYS","Year":2023,"Internet_usage":97.6927,"population":35126298,"x":2023,"y":97.6927}],"type":"line"},{"name":"Norway","data":[{"X":3137,"country_name":"Norway","country_code":"NOR","Year":2000,"Internet_usage":52,"population":4490967,"x":2000,"y":52},{"X":3138,"country_name":"Norway","country_code":"NOR","Year":2001,"Internet_usage":64,"population":4513751,"x":2001,"y":64},{"X":3139,"country_name":"Norway","country_code":"NOR","Year":2002,"Internet_usage":72.84,"population":4538159,"x":2002,"y":72.84},{"X":3140,"country_name":"Norway","country_code":"NOR","Year":2003,"Internet_usage":78.13,"population":4564855,"x":2003,"y":78.13},{"X":3141,"country_name":"Norway","country_code":"NOR","Year":2004,"Internet_usage":77.69,"population":4591910,"x":2004,"y":77.69},{"X":3142,"country_name":"Norway","country_code":"NOR","Year":2005,"Internet_usage":81.98999999999999,"population":4623291,"x":2005,"y":81.98999999999999},{"X":3143,"country_name":"Norway","country_code":"NOR","Year":2006,"Internet_usage":82.55,"population":4660677,"x":2006,"y":82.55},{"X":3144,"country_name":"Norway","country_code":"NOR","Year":2007,"Internet_usage":86.93000000000001,"population":4709153,"x":2007,"y":86.93000000000001},{"X":3145,"country_name":"Norway","country_code":"NOR","Year":2008,"Internet_usage":90.56999999999999,"population":4768212,"x":2008,"y":90.56999999999999},{"X":3146,"country_name":"Norway","country_code":"NOR","Year":2009,"Internet_usage":92.08,"population":4828726,"x":2009,"y":92.08},{"X":3147,"country_name":"Norway","country_code":"NOR","Year":2010,"Internet_usage":93.39,"population":4889252,"x":2010,"y":93.39},{"X":3148,"country_name":"Norway","country_code":"NOR","Year":2011,"Internet_usage":93.48999999999999,"population":4953088,"x":2011,"y":93.48999999999999},{"X":3149,"country_name":"Norway","country_code":"NOR","Year":2012,"Internet_usage":94.65000000000001,"population":5018573,"x":2012,"y":94.65000000000001},{"X":3150,"country_name":"Norway","country_code":"NOR","Year":2013,"Internet_usage":95.0534,"population":5079623,"x":2013,"y":95.0534},{"X":3151,"country_name":"Norway","country_code":"NOR","Year":2014,"Internet_usage":96.3005,"population":5137232,"x":2014,"y":96.3005},{"X":3152,"country_name":"Norway","country_code":"NOR","Year":2015,"Internet_usage":96.8103,"population":5188607,"x":2015,"y":96.8103},{"X":3153,"country_name":"Norway","country_code":"NOR","Year":2016,"Internet_usage":97.29819999999999,"population":5234519,"x":2016,"y":97.29819999999999},{"X":3154,"country_name":"Norway","country_code":"NOR","Year":2017,"Internet_usage":96.35760000000001,"population":5276968,"x":2017,"y":96.35760000000001},{"X":3155,"country_name":"Norway","country_code":"NOR","Year":2018,"Internet_usage":96.49169999999999,"population":5311916,"x":2018,"y":96.49169999999999},{"X":3156,"country_name":"Norway","country_code":"NOR","Year":2019,"Internet_usage":98,"population":5347896,"x":2019,"y":98},{"X":3157,"country_name":"Norway","country_code":"NOR","Year":2020,"Internet_usage":94.60760000000001,"population":5379475,"x":2020,"y":94.60760000000001},{"X":3158,"country_name":"Norway","country_code":"NOR","Year":2021,"Internet_usage":99,"population":5408320,"x":2021,"y":99},{"X":3159,"country_name":"Norway","country_code":"NOR","Year":2022,"Internet_usage":99,"population":5457127,"x":2022,"y":99},{"X":3160,"country_name":"Norway","country_code":"NOR","Year":2023,"Internet_usage":99,"population":5519594,"x":2023,"y":99}],"type":"line"},{"name":"Saudi Arabia","data":[{"X":3550,"country_name":"Saudi Arabia","country_code":"SAU","Year":2000,"Internet_usage":2.21069,"population":16177722,"x":2000,"y":2.21069},{"X":3551,"country_name":"Saudi Arabia","country_code":"SAU","Year":2001,"Internet_usage":4.68105,"population":17041397,"x":2001,"y":4.68105},{"X":3552,"country_name":"Saudi Arabia","country_code":"SAU","Year":2002,"Internet_usage":6.38471,"population":17910910,"x":2002,"y":6.38471},{"X":3553,"country_name":"Saudi Arabia","country_code":"SAU","Year":2003,"Internet_usage":8.001580000000001,"population":18786767,"x":2003,"y":8.001580000000001},{"X":3554,"country_name":"Saudi Arabia","country_code":"SAU","Year":2004,"Internet_usage":10.2345,"population":19669480,"x":2004,"y":10.2345},{"X":3555,"country_name":"Saudi Arabia","country_code":"SAU","Year":2005,"Internet_usage":12.705,"population":20559890,"x":2005,"y":12.705},{"X":3556,"country_name":"Saudi Arabia","country_code":"SAU","Year":2006,"Internet_usage":19.4596,"population":21459144,"x":2006,"y":19.4596},{"X":3557,"country_name":"Saudi Arabia","country_code":"SAU","Year":2007,"Internet_usage":30,"population":22368313,"x":2007,"y":30},{"X":3558,"country_name":"Saudi Arabia","country_code":"SAU","Year":2008,"Internet_usage":36,"population":23287877,"x":2008,"y":36},{"X":3559,"country_name":"Saudi Arabia","country_code":"SAU","Year":2009,"Internet_usage":38,"population":24217654,"x":2009,"y":38},{"X":3560,"country_name":"Saudi Arabia","country_code":"SAU","Year":2010,"Internet_usage":41,"population":23978487,"x":2010,"y":41},{"X":3561,"country_name":"Saudi Arabia","country_code":"SAU","Year":2011,"Internet_usage":47.5,"population":25091867,"x":2011,"y":47.5},{"X":3562,"country_name":"Saudi Arabia","country_code":"SAU","Year":2012,"Internet_usage":54,"population":26168861,"x":2012,"y":54},{"X":3563,"country_name":"Saudi Arabia","country_code":"SAU","Year":2013,"Internet_usage":60.5,"population":27624004,"x":2013,"y":60.5},{"X":3564,"country_name":"Saudi Arabia","country_code":"SAU","Year":2014,"Internet_usage":64.7137,"population":28309273,"x":2014,"y":64.7137},{"X":3565,"country_name":"Saudi Arabia","country_code":"SAU","Year":2015,"Internet_usage":69.61620000000001,"population":29816382,"x":2015,"y":69.61620000000001},{"X":3566,"country_name":"Saudi Arabia","country_code":"SAU","Year":2016,"Internet_usage":74.8793,"population":30954198,"x":2016,"y":74.8793},{"X":3567,"country_name":"Saudi Arabia","country_code":"SAU","Year":2017,"Internet_usage":94.1756,"population":30977355,"x":2017,"y":94.1756},{"X":3568,"country_name":"Saudi Arabia","country_code":"SAU","Year":2018,"Internet_usage":93.31,"population":30196281,"x":2018,"y":93.31},{"X":3569,"country_name":"Saudi Arabia","country_code":"SAU","Year":2019,"Internet_usage":95.7247,"population":30063799,"x":2019,"y":95.7247},{"X":3570,"country_name":"Saudi Arabia","country_code":"SAU","Year":2020,"Internet_usage":97.8623,"population":31552510,"x":2020,"y":97.8623},{"X":3571,"country_name":"Saudi Arabia","country_code":"SAU","Year":2021,"Internet_usage":100,"population":30784383,"x":2021,"y":100},{"X":3572,"country_name":"Saudi Arabia","country_code":"SAU","Year":2022,"Internet_usage":100,"population":32175224,"x":2022,"y":100},{"X":3573,"country_name":"Saudi Arabia","country_code":"SAU","Year":2023,"Internet_usage":100,"population":33264292,"x":2023,"y":100}],"type":"line"},{"name":"Switzerland","data":[{"X":3981,"country_name":"Switzerland","country_code":"CHE","Year":2000,"Internet_usage":47.1,"population":7184250,"x":2000,"y":47.1},{"X":3982,"country_name":"Switzerland","country_code":"CHE","Year":2001,"Internet_usage":55.1,"population":7229854,"x":2001,"y":55.1},{"X":3983,"country_name":"Switzerland","country_code":"CHE","Year":2002,"Internet_usage":61.4,"population":7284753,"x":2002,"y":61.4},{"X":3984,"country_name":"Switzerland","country_code":"CHE","Year":2003,"Internet_usage":65.09999999999999,"population":7339001,"x":2003,"y":65.09999999999999},{"X":3985,"country_name":"Switzerland","country_code":"CHE","Year":2004,"Internet_usage":67.8,"population":7389625,"x":2004,"y":67.8},{"X":3986,"country_name":"Switzerland","country_code":"CHE","Year":2005,"Internet_usage":70.09999999999999,"population":7437115,"x":2005,"y":70.09999999999999},{"X":3987,"country_name":"Switzerland","country_code":"CHE","Year":2006,"Internet_usage":75.7,"population":7483934,"x":2006,"y":75.7},{"X":3988,"country_name":"Switzerland","country_code":"CHE","Year":2007,"Internet_usage":77.2,"population":7551117,"x":2007,"y":77.2},{"X":3989,"country_name":"Switzerland","country_code":"CHE","Year":2008,"Internet_usage":79.2,"population":7647675,"x":2008,"y":79.2},{"X":3990,"country_name":"Switzerland","country_code":"CHE","Year":2009,"Internet_usage":81.3,"population":7743831,"x":2009,"y":81.3},{"X":3991,"country_name":"Switzerland","country_code":"CHE","Year":2010,"Internet_usage":83.90000000000001,"population":7824909,"x":2010,"y":83.90000000000001},{"X":3992,"country_name":"Switzerland","country_code":"CHE","Year":2011,"Internet_usage":85.193,"population":7912398,"x":2011,"y":85.193},{"X":3993,"country_name":"Switzerland","country_code":"CHE","Year":2012,"Internet_usage":85.2,"population":7996861,"x":2012,"y":85.2},{"X":3994,"country_name":"Switzerland","country_code":"CHE","Year":2013,"Internet_usage":86.34,"population":8089346,"x":2013,"y":86.34},{"X":3995,"country_name":"Switzerland","country_code":"CHE","Year":2014,"Internet_usage":83.6173,"population":8188649,"x":2014,"y":83.6173},{"X":3996,"country_name":"Switzerland","country_code":"CHE","Year":2015,"Internet_usage":87.4791,"population":8282396,"x":2015,"y":87.4791},{"X":3997,"country_name":"Switzerland","country_code":"CHE","Year":2016,"Internet_usage":89.1347,"population":8373338,"x":2016,"y":89.1347},{"X":3998,"country_name":"Switzerland","country_code":"CHE","Year":2017,"Internet_usage":89.6861,"population":8451840,"x":2017,"y":89.6861},{"X":3999,"country_name":"Switzerland","country_code":"CHE","Year":2018,"Internet_usage":91.8,"population":8514329,"x":2018,"y":91.8},{"X":4000,"country_name":"Switzerland","country_code":"CHE","Year":2019,"Internet_usage":93.1461,"population":8575280,"x":2019,"y":93.1461},{"X":4001,"country_name":"Switzerland","country_code":"CHE","Year":2020,"Internet_usage":94.34990000000001,"population":8638167,"x":2020,"y":94.34990000000001},{"X":4002,"country_name":"Switzerland","country_code":"CHE","Year":2021,"Internet_usage":95.5694,"population":8704546,"x":2021,"y":95.5694},{"X":4003,"country_name":"Switzerland","country_code":"CHE","Year":2022,"Internet_usage":96.80459999999999,"population":8777088,"x":2022,"y":96.80459999999999},{"X":4004,"country_name":"Switzerland","country_code":"CHE","Year":2023,"Internet_usage":97.34439999999999,"population":8888093,"x":2023,"y":97.34439999999999}],"type":"line"},{"name":"United Arab Emirates","data":[{"X":4313,"country_name":"United Arab Emirates","country_code":"ARE","Year":2000,"Internet_usage":23.6253,"population":3493575,"x":2000,"y":23.6253},{"X":4314,"country_name":"United Arab Emirates","country_code":"ARE","Year":2001,"Internet_usage":26.2718,"population":3723590,"x":2001,"y":26.2718},{"X":4315,"country_name":"United Arab Emirates","country_code":"ARE","Year":2002,"Internet_usage":28.3165,"population":3956826,"x":2002,"y":28.3165},{"X":4316,"country_name":"United Arab Emirates","country_code":"ARE","Year":2003,"Internet_usage":29.478,"population":4192457,"x":2003,"y":29.478},{"X":4317,"country_name":"United Arab Emirates","country_code":"ARE","Year":2004,"Internet_usage":30.1313,"population":4428967,"x":2004,"y":30.1313},{"X":4318,"country_name":"United Arab Emirates","country_code":"ARE","Year":2005,"Internet_usage":40,"population":4664790,"x":2005,"y":40},{"X":4319,"country_name":"United Arab Emirates","country_code":"ARE","Year":2006,"Internet_usage":52,"population":5009100,"x":2006,"y":52},{"X":4320,"country_name":"United Arab Emirates","country_code":"ARE","Year":2007,"Internet_usage":61,"population":5624635,"x":2007,"y":61},{"X":4321,"country_name":"United Arab Emirates","country_code":"ARE","Year":2008,"Internet_usage":63,"population":6302664,"x":2008,"y":63},{"X":4322,"country_name":"United Arab Emirates","country_code":"ARE","Year":2009,"Internet_usage":64,"population":6707058,"x":2009,"y":64},{"X":4323,"country_name":"United Arab Emirates","country_code":"ARE","Year":2010,"Internet_usage":68,"population":6869838,"x":2010,"y":68},{"X":4324,"country_name":"United Arab Emirates","country_code":"ARE","Year":2011,"Internet_usage":78,"population":7104538,"x":2011,"y":78},{"X":4325,"country_name":"United Arab Emirates","country_code":"ARE","Year":2012,"Internet_usage":85,"population":7391448,"x":2012,"y":85},{"X":4326,"country_name":"United Arab Emirates","country_code":"ARE","Year":2013,"Internet_usage":88,"population":7693031,"x":2013,"y":88},{"X":4327,"country_name":"United Arab Emirates","country_code":"ARE","Year":2014,"Internet_usage":90.40000000000001,"population":8059440,"x":2014,"y":90.40000000000001},{"X":4328,"country_name":"United Arab Emirates","country_code":"ARE","Year":2015,"Internet_usage":90.5,"population":8505237,"x":2015,"y":90.5},{"X":4329,"country_name":"United Arab Emirates","country_code":"ARE","Year":2016,"Internet_usage":90.59999999999999,"population":8935095,"x":2016,"y":90.59999999999999},{"X":4330,"country_name":"United Arab Emirates","country_code":"ARE","Year":2017,"Internet_usage":94.8199,"population":9223225,"x":2017,"y":94.8199},{"X":4331,"country_name":"United Arab Emirates","country_code":"ARE","Year":2018,"Internet_usage":98.45,"population":9346701,"x":2018,"y":98.45},{"X":4332,"country_name":"United Arab Emirates","country_code":"ARE","Year":2019,"Internet_usage":99.15000000000001,"population":9445785,"x":2019,"y":99.15000000000001},{"X":4333,"country_name":"United Arab Emirates","country_code":"ARE","Year":2020,"Internet_usage":100,"population":9401038,"x":2020,"y":100},{"X":4334,"country_name":"United Arab Emirates","country_code":"ARE","Year":2021,"Internet_usage":100,"population":9575152,"x":2021,"y":100},{"X":4335,"country_name":"United Arab Emirates","country_code":"ARE","Year":2022,"Internet_usage":100,"population":10074977,"x":2022,"y":100},{"X":4336,"country_name":"United Arab Emirates","country_code":"ARE","Year":2023,"Internet_usage":100,"population":10483751,"x":2023,"y":100}],"type":"line"}],"xAxis":{"type":"linear","title":{"text":"Year","style":{"fontFamily":"Lato","fontSize":"14px"}},"lineColor":"#333333"},"legend":{"itemStyle":{"fontFamily":"Lato","fontSize":"12px","color":"#333333"}},"colors":["#E31A1C","#1F78B4","#33A02C","#FF7F00","#6A3D9A","#B15928"]},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":"Lato","debug":false},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>Observations:</p>
+<p>Middle Eastern nations, including Bahrain, Saudi Arabia, and the UAE, dominate the top rankings with nearly 100% internet penetration.</p>
+<p>European countries such as Luxembourg, Norway, and Switzerland also appear among the leaders.</p>
+<p>The absence of the United States and the UK may be due to factors such as rural-urban divides, disparities in broadband access, or differing methodologies in data reporting.</p>
+</section>
+<section id="bottom-10-countries-with-lowest-internet-penetration-2023" class="level3">
+<h3 class="anchored" data-anchor-id="bottom-10-countries-with-lowest-internet-penetration-2023">Bottom 10 Countries with Lowest Internet Penetration (2023)</h3>
+<p>Despite global progress, certain countries continue to struggle with widespread internet access.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="highchart html-widget html-fill-item" id="htmlwidget-e4ad79bd7d6d7406f06e" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-e4ad79bd7d6d7406f06e">{"x":{"hc_opts":{"chart":{"reflow":true,"backgroundColor":"#F4F4F4"},"title":{"text":"Countries with Lowest Internet Penetration","style":{"fontFamily":"Lato","fontSize":"18px"}},"yAxis":{"title":{"text":"Internet Usage (%)","style":{"fontFamily":"Lato","fontSize":"14px"}},"type":"linear","gridLineColor":"#D9D9D9"},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":true},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}}},"series":[{"name":"Bangladesh","data":[{"X":312,"country_name":"Bangladesh","country_code":"BGD","Year":2000,"Internet_usage":0.0710394,"population":134544304,"x":2000,"y":0.0710394},{"X":313,"country_name":"Bangladesh","country_code":"BGD","Year":2001,"Internet_usage":0.129808,"population":136805810,"x":2001,"y":0.129808},{"X":314,"country_name":"Bangladesh","country_code":"BGD","Year":2002,"Internet_usage":0.13992,"population":138933658,"x":2002,"y":0.13992},{"X":315,"country_name":"Bangladesh","country_code":"BGD","Year":2003,"Internet_usage":0.163878,"population":140970351,"x":2003,"y":0.163878},{"X":316,"country_name":"Bangladesh","country_code":"BGD","Year":2004,"Internet_usage":0.199036,"population":142902856,"x":2004,"y":0.199036},{"X":317,"country_name":"Bangladesh","country_code":"BGD","Year":2005,"Internet_usage":0.241637,"population":144715786,"x":2005,"y":0.241637},{"X":318,"country_name":"Bangladesh","country_code":"BGD","Year":2006,"Internet_usage":1,"population":146405973,"x":2006,"y":1},{"X":319,"country_name":"Bangladesh","country_code":"BGD","Year":2007,"Internet_usage":1.8,"population":147989278,"x":2007,"y":1.8},{"X":320,"country_name":"Bangladesh","country_code":"BGD","Year":2008,"Internet_usage":2.5,"population":149474264,"x":2008,"y":2.5},{"X":321,"country_name":"Bangladesh","country_code":"BGD","Year":2009,"Internet_usage":3.1,"population":150873714,"x":2009,"y":3.1},{"X":322,"country_name":"Bangladesh","country_code":"BGD","Year":2010,"Internet_usage":3.7,"population":152201981,"x":2010,"y":3.7},{"X":323,"country_name":"Bangladesh","country_code":"BGD","Year":2011,"Internet_usage":4.5,"population":153591076,"x":2011,"y":4.5},{"X":324,"country_name":"Bangladesh","country_code":"BGD","Year":2012,"Internet_usage":5,"population":155070101,"x":2012,"y":5},{"X":325,"country_name":"Bangladesh","country_code":"BGD","Year":2013,"Internet_usage":6.63,"population":156532141,"x":2013,"y":6.63},{"X":326,"country_name":"Bangladesh","country_code":"BGD","Year":2014,"Internet_usage":11.9,"population":157964929,"x":2014,"y":11.9},{"X":327,"country_name":"Bangladesh","country_code":"BGD","Year":2015,"Internet_usage":12.9,"population":159383179,"x":2015,"y":12.9},{"X":328,"country_name":"Bangladesh","country_code":"BGD","Year":2016,"Internet_usage":18.1,"population":160811932,"x":2016,"y":18.1},{"X":329,"country_name":"Bangladesh","country_code":"BGD","Year":2017,"Internet_usage":21.5,"population":162186147,"x":2017,"y":21.5},{"X":330,"country_name":"Bangladesh","country_code":"BGD","Year":2018,"Internet_usage":25.6,"population":163523103,"x":2018,"y":25.6},{"X":331,"country_name":"Bangladesh","country_code":"BGD","Year":2019,"Internet_usage":30.4,"population":164913055,"x":2019,"y":30.4},{"X":332,"country_name":"Bangladesh","country_code":"BGD","Year":2020,"Internet_usage":36.1091,"population":166298024,"x":2020,"y":36.1091},{"X":333,"country_name":"Bangladesh","country_code":"BGD","Year":2021,"Internet_usage":38.9174,"population":167658854,"x":2021,"y":38.9174},{"X":334,"country_name":"Bangladesh","country_code":"BGD","Year":2022,"Internet_usage":41.6152,"population":169384897,"x":2022,"y":41.6152},{"X":335,"country_name":"Bangladesh","country_code":"BGD","Year":2023,"Internet_usage":44.5027,"population":171466990,"x":2023,"y":44.5027}],"type":"line"},{"name":"Bulgaria","data":[{"X":613,"country_name":"Bulgaria","country_code":"BGR","Year":2000,"Internet_usage":5.37092,"population":8170172,"x":2000,"y":5.37092},{"X":614,"country_name":"Bulgaria","country_code":"BGR","Year":2001,"Internet_usage":7.6123,"population":8009142,"x":2001,"y":7.6123},{"X":615,"country_name":"Bulgaria","country_code":"BGR","Year":2002,"Internet_usage":9.08,"population":7837161,"x":2002,"y":9.08},{"X":616,"country_name":"Bulgaria","country_code":"BGR","Year":2003,"Internet_usage":12.04,"population":7775327,"x":2003,"y":12.04},{"X":617,"country_name":"Bulgaria","country_code":"BGR","Year":2004,"Internet_usage":18.13,"population":7716860,"x":2004,"y":18.13},{"X":618,"country_name":"Bulgaria","country_code":"BGR","Year":2005,"Internet_usage":19.97,"population":7658972,"x":2005,"y":19.97},{"X":619,"country_name":"Bulgaria","country_code":"BGR","Year":2006,"Internet_usage":27.09,"population":7601022,"x":2006,"y":27.09},{"X":620,"country_name":"Bulgaria","country_code":"BGR","Year":2007,"Internet_usage":33.64,"population":7545338,"x":2007,"y":33.64},{"X":621,"country_name":"Bulgaria","country_code":"BGR","Year":2008,"Internet_usage":39.67,"population":7492561,"x":2008,"y":39.67},{"X":622,"country_name":"Bulgaria","country_code":"BGR","Year":2009,"Internet_usage":45,"population":7444443,"x":2009,"y":45},{"X":623,"country_name":"Bulgaria","country_code":"BGR","Year":2010,"Internet_usage":46.23,"population":7395599,"x":2010,"y":46.23},{"X":624,"country_name":"Bulgaria","country_code":"BGR","Year":2011,"Internet_usage":47.98,"population":7348328,"x":2011,"y":47.98},{"X":625,"country_name":"Bulgaria","country_code":"BGR","Year":2012,"Internet_usage":51.9,"population":7305888,"x":2012,"y":51.9},{"X":626,"country_name":"Bulgaria","country_code":"BGR","Year":2013,"Internet_usage":53.0615,"population":7265115,"x":2013,"y":53.0615},{"X":627,"country_name":"Bulgaria","country_code":"BGR","Year":2014,"Internet_usage":55.4904,"population":7223938,"x":2014,"y":55.4904},{"X":628,"country_name":"Bulgaria","country_code":"BGR","Year":2015,"Internet_usage":56.6563,"population":7177991,"x":2015,"y":56.6563},{"X":629,"country_name":"Bulgaria","country_code":"BGR","Year":2016,"Internet_usage":59.8255,"population":7127822,"x":2016,"y":59.8255},{"X":630,"country_name":"Bulgaria","country_code":"BGR","Year":2017,"Internet_usage":63.4101,"population":7075947,"x":2017,"y":63.4101},{"X":631,"country_name":"Bulgaria","country_code":"BGR","Year":2018,"Internet_usage":64.782,"population":7025037,"x":2018,"y":64.782},{"X":632,"country_name":"Bulgaria","country_code":"BGR","Year":2019,"Internet_usage":67.947,"population":6975761,"x":2019,"y":67.947},{"X":633,"country_name":"Bulgaria","country_code":"BGR","Year":2020,"Internet_usage":70.16249999999999,"population":6934015,"x":2020,"y":70.16249999999999},{"X":634,"country_name":"Bulgaria","country_code":"BGR","Year":2021,"Internet_usage":75.2714,"population":6877743,"x":2021,"y":75.2714},{"X":635,"country_name":"Bulgaria","country_code":"BGR","Year":2022,"Internet_usage":79.12690000000001,"population":6643324,"x":2022,"y":79.12690000000001},{"X":636,"country_name":"Bulgaria","country_code":"BGR","Year":2023,"Internet_usage":80.3896,"population":6446596,"x":2023,"y":80.3896}],"type":"line"},{"name":"China","data":[{"X":856,"country_name":"China","country_code":"CHN","Year":2000,"Internet_usage":1.77591,"population":1262645000,"x":2000,"y":1.77591},{"X":857,"country_name":"China","country_code":"CHN","Year":2001,"Internet_usage":2.63965,"population":1271850000,"x":2001,"y":2.63965},{"X":858,"country_name":"China","country_code":"CHN","Year":2002,"Internet_usage":4.5957,"population":1280400000,"x":2002,"y":4.5957},{"X":859,"country_name":"China","country_code":"CHN","Year":2003,"Internet_usage":6.2,"population":1288400000,"x":2003,"y":6.2},{"X":860,"country_name":"China","country_code":"CHN","Year":2004,"Internet_usage":7.3,"population":1296075000,"x":2004,"y":7.3},{"X":861,"country_name":"China","country_code":"CHN","Year":2005,"Internet_usage":8.523260000000001,"population":1303720000,"x":2005,"y":8.523260000000001},{"X":862,"country_name":"China","country_code":"CHN","Year":2006,"Internet_usage":10.5232,"population":1311020000,"x":2006,"y":10.5232},{"X":863,"country_name":"China","country_code":"CHN","Year":2007,"Internet_usage":16,"population":1317885000,"x":2007,"y":16},{"X":864,"country_name":"China","country_code":"CHN","Year":2008,"Internet_usage":22.6,"population":1324655000,"x":2008,"y":22.6},{"X":865,"country_name":"China","country_code":"CHN","Year":2009,"Internet_usage":28.9,"population":1331260000,"x":2009,"y":28.9},{"X":866,"country_name":"China","country_code":"CHN","Year":2010,"Internet_usage":34.3,"population":1337705000,"x":2010,"y":34.3},{"X":867,"country_name":"China","country_code":"CHN","Year":2011,"Internet_usage":38.3,"population":1345035000,"x":2011,"y":38.3},{"X":868,"country_name":"China","country_code":"CHN","Year":2012,"Internet_usage":42.3001,"population":1354190000,"x":2012,"y":42.3001},{"X":869,"country_name":"China","country_code":"CHN","Year":2013,"Internet_usage":45.8,"population":1363240000,"x":2013,"y":45.8},{"X":870,"country_name":"China","country_code":"CHN","Year":2014,"Internet_usage":47.9,"population":1371860000,"x":2014,"y":47.9},{"X":871,"country_name":"China","country_code":"CHN","Year":2015,"Internet_usage":50.3,"population":1379860000,"x":2015,"y":50.3},{"X":872,"country_name":"China","country_code":"CHN","Year":2016,"Internet_usage":53.2,"population":1387790000,"x":2016,"y":53.2},{"X":873,"country_name":"China","country_code":"CHN","Year":2017,"Internet_usage":54.3,"population":1396215000,"x":2017,"y":54.3},{"X":874,"country_name":"China","country_code":"CHN","Year":2018,"Internet_usage":59.2,"population":1402760000,"x":2018,"y":59.2},{"X":875,"country_name":"China","country_code":"CHN","Year":2019,"Internet_usage":64.0809,"population":1407745000,"x":2019,"y":64.0809},{"X":876,"country_name":"China","country_code":"CHN","Year":2020,"Internet_usage":70.0528,"population":1411100000,"x":2020,"y":70.0528},{"X":877,"country_name":"China","country_code":"CHN","Year":2021,"Internet_usage":73.0532,"population":1412360000,"x":2021,"y":73.0532},{"X":878,"country_name":"China","country_code":"CHN","Year":2022,"Internet_usage":75.6113,"population":1412175000,"x":2022,"y":75.6113},{"X":879,"country_name":"China","country_code":"CHN","Year":2023,"Internet_usage":77.48269999999999,"population":1410710000,"x":2023,"y":77.48269999999999}],"type":"line"},{"name":"Ecuador","data":[{"X":1204,"country_name":"Ecuador","country_code":"ECU","Year":2000,"Internet_usage":1.46219,"population":12689206,"x":2000,"y":1.46219},{"X":1205,"country_name":"Ecuador","country_code":"ECU","Year":2001,"Internet_usage":2.67044,"population":12910740,"x":2001,"y":2.67044},{"X":1206,"country_name":"Ecuador","country_code":"ECU","Year":2002,"Internet_usage":4.2608,"population":13138472,"x":2002,"y":4.2608},{"X":1207,"country_name":"Ecuador","country_code":"ECU","Year":2003,"Internet_usage":4.46023,"population":13372306,"x":2003,"y":4.46023},{"X":1208,"country_name":"Ecuador","country_code":"ECU","Year":2004,"Internet_usage":4.83444,"population":13608701,"x":2004,"y":4.83444},{"X":1209,"country_name":"Ecuador","country_code":"ECU","Year":2005,"Internet_usage":5.99426,"population":13846163,"x":2005,"y":5.99426},{"X":1210,"country_name":"Ecuador","country_code":"ECU","Year":2006,"Internet_usage":7.2,"population":14086131,"x":2006,"y":7.2},{"X":1211,"country_name":"Ecuador","country_code":"ECU","Year":2007,"Internet_usage":10.8,"population":14328773,"x":2007,"y":10.8},{"X":1212,"country_name":"Ecuador","country_code":"ECU","Year":2008,"Internet_usage":18.8,"population":14575202,"x":2008,"y":18.8},{"X":1213,"country_name":"Ecuador","country_code":"ECU","Year":2009,"Internet_usage":24.6,"population":14825954,"x":2009,"y":24.6},{"X":1214,"country_name":"Ecuador","country_code":"ECU","Year":2010,"Internet_usage":29.03,"population":15076695,"x":2010,"y":29.03},{"X":1215,"country_name":"Ecuador","country_code":"ECU","Year":2011,"Internet_usage":31.3668,"population":15326227,"x":2011,"y":31.3668},{"X":1216,"country_name":"Ecuador","country_code":"ECU","Year":2012,"Internet_usage":35.1351,"population":15572194,"x":2012,"y":35.1351},{"X":1217,"country_name":"Ecuador","country_code":"ECU","Year":2013,"Internet_usage":40.2791,"population":15807128,"x":2013,"y":40.2791},{"X":1218,"country_name":"Ecuador","country_code":"ECU","Year":2014,"Internet_usage":45.5904,"population":16035124,"x":2014,"y":45.5904},{"X":1219,"country_name":"Ecuador","country_code":"ECU","Year":2015,"Internet_usage":48.9404,"population":16266225,"x":2015,"y":48.9404},{"X":1220,"country_name":"Ecuador","country_code":"ECU","Year":2016,"Internet_usage":54.0629,"population":16505139,"x":2016,"y":54.0629},{"X":1221,"country_name":"Ecuador","country_code":"ECU","Year":2017,"Internet_usage":55.8,"population":16759519,"x":2017,"y":55.8},{"X":1222,"country_name":"Ecuador","country_code":"ECU","Year":2018,"Internet_usage":57.5,"population":17049547,"x":2018,"y":57.5},{"X":1223,"country_name":"Ecuador","country_code":"ECU","Year":2019,"Internet_usage":59.2,"population":17340021,"x":2019,"y":59.2},{"X":1224,"country_name":"Ecuador","country_code":"ECU","Year":2020,"Internet_usage":70.7,"population":17546065,"x":2020,"y":70.7},{"X":1225,"country_name":"Ecuador","country_code":"ECU","Year":2021,"Internet_usage":70.2073,"population":17682454,"x":2021,"y":70.2073},{"X":1226,"country_name":"Ecuador","country_code":"ECU","Year":2022,"Internet_usage":69.71810000000001,"population":17823897,"x":2022,"y":69.71810000000001},{"X":1227,"country_name":"Ecuador","country_code":"ECU","Year":2023,"Internet_usage":72.6943,"population":17980083,"x":2023,"y":72.6943}],"type":"line"},{"name":"Georgia","data":[{"X":1538,"country_name":"Georgia","country_code":"GEO","Year":2000,"Internet_usage":0.484746,"population":4077131,"x":2000,"y":0.484746},{"X":1539,"country_name":"Georgia","country_code":"GEO","Year":2001,"Internet_usage":0.992344,"population":4014373,"x":2001,"y":0.992344},{"X":1540,"country_name":"Georgia","country_code":"GEO","Year":2002,"Internet_usage":1.58788,"population":3978515,"x":2002,"y":1.58788},{"X":1541,"country_name":"Georgia","country_code":"GEO","Year":2003,"Internet_usage":2.55882,"population":3951736,"x":2003,"y":2.55882},{"X":1542,"country_name":"Georgia","country_code":"GEO","Year":2004,"Internet_usage":3.88622,"population":3927340,"x":2004,"y":3.88622},{"X":1543,"country_name":"Georgia","country_code":"GEO","Year":2005,"Internet_usage":6.07946,"population":3902469,"x":2005,"y":6.07946},{"X":1544,"country_name":"Georgia","country_code":"GEO","Year":2006,"Internet_usage":7.52688,"population":3880347,"x":2006,"y":7.52688},{"X":1545,"country_name":"Georgia","country_code":"GEO","Year":2007,"Internet_usage":8.26,"population":3860158,"x":2007,"y":8.26},{"X":1546,"country_name":"Georgia","country_code":"GEO","Year":2008,"Internet_usage":10.01,"population":3848449,"x":2008,"y":10.01},{"X":1547,"country_name":"Georgia","country_code":"GEO","Year":2009,"Internet_usage":20.07,"population":3814419,"x":2009,"y":20.07},{"X":1548,"country_name":"Georgia","country_code":"GEO","Year":2010,"Internet_usage":26.9,"population":3786695,"x":2010,"y":26.9},{"X":1549,"country_name":"Georgia","country_code":"GEO","Year":2011,"Internet_usage":31.52,"population":3756441,"x":2011,"y":31.52},{"X":1550,"country_name":"Georgia","country_code":"GEO","Year":2012,"Internet_usage":36.94,"population":3728874,"x":2012,"y":36.94},{"X":1551,"country_name":"Georgia","country_code":"GEO","Year":2013,"Internet_usage":43.3,"population":3717668,"x":2013,"y":43.3},{"X":1552,"country_name":"Georgia","country_code":"GEO","Year":2014,"Internet_usage":49.1025,"population":3719414,"x":2014,"y":49.1025},{"X":1553,"country_name":"Georgia","country_code":"GEO","Year":2015,"Internet_usage":47.5698,"population":3725276,"x":2015,"y":47.5698},{"X":1554,"country_name":"Georgia","country_code":"GEO","Year":2016,"Internet_usage":58.4593,"population":3727505,"x":2016,"y":58.4593},{"X":1555,"country_name":"Georgia","country_code":"GEO","Year":2017,"Internet_usage":59.7055,"population":3728004,"x":2017,"y":59.7055},{"X":1556,"country_name":"Georgia","country_code":"GEO","Year":2018,"Internet_usage":62.7179,"population":3726549,"x":2018,"y":62.7179},{"X":1557,"country_name":"Georgia","country_code":"GEO","Year":2019,"Internet_usage":68.8467,"population":3720161,"x":2019,"y":68.8467},{"X":1558,"country_name":"Georgia","country_code":"GEO","Year":2020,"Internet_usage":72.5316,"population":3722716,"x":2020,"y":72.5316},{"X":1559,"country_name":"Georgia","country_code":"GEO","Year":2021,"Internet_usage":76.4427,"population":3708610,"x":2021,"y":76.4427},{"X":1560,"country_name":"Georgia","country_code":"GEO","Year":2022,"Internet_usage":78.71129999999999,"population":3712502,"x":2022,"y":78.71129999999999},{"X":1561,"country_name":"Georgia","country_code":"GEO","Year":2023,"Internet_usage":81.88420000000001,"population":3715483,"x":2023,"y":81.88420000000001}],"type":"line"},{"name":"Indonesia","data":[{"X":1934,"country_name":"Indonesia","country_code":"IDN","Year":2000,"Internet_usage":0.9255640000000001,"population":216077790,"x":2000,"y":0.9255640000000001},{"X":1935,"country_name":"Indonesia","country_code":"IDN","Year":2001,"Internet_usage":2.01861,"population":219097902,"x":2001,"y":2.01861},{"X":1936,"country_name":"Indonesia","country_code":"IDN","Year":2002,"Internet_usage":2.13414,"population":222088495,"x":2002,"y":2.13414},{"X":1937,"country_name":"Indonesia","country_code":"IDN","Year":2003,"Internet_usage":2.38702,"population":225048008,"x":2003,"y":2.38702},{"X":1938,"country_name":"Indonesia","country_code":"IDN","Year":2004,"Internet_usage":2.60029,"population":227926649,"x":2004,"y":2.60029},{"X":1939,"country_name":"Indonesia","country_code":"IDN","Year":2005,"Internet_usage":3.60202,"population":230871650,"x":2005,"y":3.60202},{"X":1940,"country_name":"Indonesia","country_code":"IDN","Year":2006,"Internet_usage":4.76481,"population":233951652,"x":2006,"y":4.76481},{"X":1941,"country_name":"Indonesia","country_code":"IDN","Year":2007,"Internet_usage":5.78627,"population":237062337,"x":2007,"y":5.78627},{"X":1942,"country_name":"Indonesia","country_code":"IDN","Year":2008,"Internet_usage":7.91748,"population":240157903,"x":2008,"y":7.91748},{"X":1943,"country_name":"Indonesia","country_code":"IDN","Year":2009,"Internet_usage":6.92,"population":243220028,"x":2009,"y":6.92},{"X":1944,"country_name":"Indonesia","country_code":"IDN","Year":2010,"Internet_usage":10.92,"population":246305322,"x":2010,"y":10.92},{"X":1945,"country_name":"Indonesia","country_code":"IDN","Year":2011,"Internet_usage":12.28,"population":249470032,"x":2011,"y":12.28},{"X":1946,"country_name":"Indonesia","country_code":"IDN","Year":2012,"Internet_usage":14.52,"population":252698525,"x":2012,"y":14.52},{"X":1947,"country_name":"Indonesia","country_code":"IDN","Year":2013,"Internet_usage":14.94,"population":255852467,"x":2013,"y":14.94},{"X":1948,"country_name":"Indonesia","country_code":"IDN","Year":2014,"Internet_usage":17.1432,"population":258877399,"x":2014,"y":17.1432},{"X":1949,"country_name":"Indonesia","country_code":"IDN","Year":2015,"Internet_usage":22.0627,"population":261799249,"x":2015,"y":22.0627},{"X":1950,"country_name":"Indonesia","country_code":"IDN","Year":2016,"Internet_usage":25.4474,"population":264627418,"x":2016,"y":25.4474},{"X":1951,"country_name":"Indonesia","country_code":"IDN","Year":2017,"Internet_usage":32.3358,"population":267346658,"x":2017,"y":32.3358},{"X":1952,"country_name":"Indonesia","country_code":"IDN","Year":2018,"Internet_usage":39.9046,"population":269951846,"x":2018,"y":39.9046},{"X":1953,"country_name":"Indonesia","country_code":"IDN","Year":2019,"Internet_usage":47.6906,"population":272489381,"x":2019,"y":47.6906},{"X":1954,"country_name":"Indonesia","country_code":"IDN","Year":2020,"Internet_usage":53.7265,"population":274814866,"x":2020,"y":53.7265},{"X":1955,"country_name":"Indonesia","country_code":"IDN","Year":2021,"Internet_usage":62.1045,"population":276758053,"x":2021,"y":62.1045},{"X":1956,"country_name":"Indonesia","country_code":"IDN","Year":2022,"Internet_usage":66.4846,"population":278830529,"x":2022,"y":66.4846},{"X":1957,"country_name":"Indonesia","country_code":"IDN","Year":2023,"Internet_usage":69.2084,"population":281190067,"x":2023,"y":69.2084}],"type":"line"},{"name":"Malawi","data":[{"X":2547,"country_name":"Malawi","country_code":"MWI","Year":2000,"Internet_usage":0.126781,"population":11315942,"x":2000,"y":0.126781},{"X":2548,"country_name":"Malawi","country_code":"MWI","Year":2001,"Internet_usage":0.164021,"population":11593058,"x":2001,"y":0.164021},{"X":2549,"country_name":"Malawi","country_code":"MWI","Year":2002,"Internet_usage":0.215095,"population":11880440,"x":2002,"y":0.215095},{"X":2550,"country_name":"Malawi","country_code":"MWI","Year":2003,"Internet_usage":0.278815,"population":12181574,"x":2003,"y":0.278815},{"X":2551,"country_name":"Malawi","country_code":"MWI","Year":2004,"Internet_usage":0.347505,"population":12500737,"x":2004,"y":0.347505},{"X":2552,"country_name":"Malawi","country_code":"MWI","Year":2005,"Internet_usage":0.384489,"population":12840031,"x":2005,"y":0.384489},{"X":2553,"country_name":"Malawi","country_code":"MWI","Year":2006,"Internet_usage":0.425137,"population":13198701,"x":2006,"y":0.425137},{"X":2554,"country_name":"Malawi","country_code":"MWI","Year":2007,"Internet_usage":0.965865,"population":13576343,"x":2007,"y":0.965865},{"X":2555,"country_name":"Malawi","country_code":"MWI","Year":2008,"Internet_usage":0.7,"population":13976417,"x":2008,"y":0.7},{"X":2556,"country_name":"Malawi","country_code":"MWI","Year":2009,"Internet_usage":1.07,"population":14395788,"x":2009,"y":1.07},{"X":2557,"country_name":"Malawi","country_code":"MWI","Year":2010,"Internet_usage":2.26,"population":14826463,"x":2010,"y":2.26},{"X":2558,"country_name":"Malawi","country_code":"MWI","Year":2011,"Internet_usage":3.33,"population":15265022,"x":2011,"y":3.33},{"X":2559,"country_name":"Malawi","country_code":"MWI","Year":2012,"Internet_usage":4.3506,"population":15709577,"x":2012,"y":4.3506},{"X":2560,"country_name":"Malawi","country_code":"MWI","Year":2013,"Internet_usage":5.05,"population":16161816,"x":2013,"y":5.05},{"X":2561,"country_name":"Malawi","country_code":"MWI","Year":2014,"Internet_usage":5.83,"population":16621538,"x":2014,"y":5.83},{"X":2562,"country_name":"Malawi","country_code":"MWI","Year":2015,"Internet_usage":6,"population":17085587,"x":2015,"y":6},{"X":2563,"country_name":"Malawi","country_code":"MWI","Year":2016,"Internet_usage":6.3,"population":17557739,"x":2016,"y":6.3},{"X":2564,"country_name":"Malawi","country_code":"MWI","Year":2017,"Internet_usage":7,"population":18039715,"x":2017,"y":7},{"X":2565,"country_name":"Malawi","country_code":"MWI","Year":2018,"Internet_usage":8,"population":18528081,"x":2018,"y":8},{"X":2566,"country_name":"Malawi","country_code":"MWI","Year":2019,"Internet_usage":14.6,"population":19025752,"x":2019,"y":14.6},{"X":2567,"country_name":"Malawi","country_code":"MWI","Year":2020,"Internet_usage":22.2466,"population":19533888,"x":2020,"y":22.2466},{"X":2568,"country_name":"Malawi","country_code":"MWI","Year":2021,"Internet_usage":26.9325,"population":20047258,"x":2021,"y":26.9325},{"X":2569,"country_name":"Malawi","country_code":"MWI","Year":2022,"Internet_usage":27.6609,"population":20568728,"x":2022,"y":27.6609},{"X":2570,"country_name":"Malawi","country_code":"MWI","Year":2023,"Internet_usage":18,"population":21104482,"x":2023,"y":18}],"type":"line"},{"name":"Mexico","data":[{"X":2732,"country_name":"Mexico","country_code":"MEX","Year":2000,"Internet_usage":5.08138,"population":98625552,"x":2000,"y":5.08138},{"X":2733,"country_name":"Mexico","country_code":"MEX","Year":2001,"Internet_usage":7.03802,"population":100099099,"x":2001,"y":7.03802},{"X":2734,"country_name":"Mexico","country_code":"MEX","Year":2002,"Internet_usage":11.9,"population":101548624,"x":2002,"y":11.9},{"X":2735,"country_name":"Mexico","country_code":"MEX","Year":2003,"Internet_usage":12.9,"population":102978515,"x":2003,"y":12.9},{"X":2736,"country_name":"Mexico","country_code":"MEX","Year":2004,"Internet_usage":14.1,"population":104394131,"x":2004,"y":14.1},{"X":2737,"country_name":"Mexico","country_code":"MEX","Year":2005,"Internet_usage":17.21,"population":105811504,"x":2005,"y":17.21},{"X":2738,"country_name":"Mexico","country_code":"MEX","Year":2006,"Internet_usage":19.52,"population":107253666,"x":2006,"y":19.52},{"X":2739,"country_name":"Mexico","country_code":"MEX","Year":2007,"Internet_usage":20.81,"population":108774360,"x":2007,"y":20.81},{"X":2740,"country_name":"Mexico","country_code":"MEX","Year":2008,"Internet_usage":21.71,"population":110374288,"x":2008,"y":21.71},{"X":2741,"country_name":"Mexico","country_code":"MEX","Year":2009,"Internet_usage":26.34,"population":111999721,"x":2009,"y":26.34},{"X":2742,"country_name":"Mexico","country_code":"MEX","Year":2010,"Internet_usage":31.05,"population":113623895,"x":2010,"y":31.05},{"X":2743,"country_name":"Mexico","country_code":"MEX","Year":2011,"Internet_usage":37.1763,"population":115243504,"x":2011,"y":37.1763},{"X":2744,"country_name":"Mexico","country_code":"MEX","Year":2012,"Internet_usage":39.75,"population":116818208,"x":2012,"y":39.75},{"X":2745,"country_name":"Mexico","country_code":"MEX","Year":2013,"Internet_usage":43.46,"population":118343573,"x":2013,"y":43.46},{"X":2746,"country_name":"Mexico","country_code":"MEX","Year":2014,"Internet_usage":44.3857,"population":119784261,"x":2014,"y":44.3857},{"X":2747,"country_name":"Mexico","country_code":"MEX","Year":2015,"Internet_usage":57.431,"population":121072306,"x":2015,"y":57.431},{"X":2748,"country_name":"Mexico","country_code":"MEX","Year":2016,"Internet_usage":59.5404,"population":122251351,"x":2016,"y":59.5404},{"X":2749,"country_name":"Mexico","country_code":"MEX","Year":2017,"Internet_usage":53.0318,"population":123400057,"x":2017,"y":53.0318},{"X":2750,"country_name":"Mexico","country_code":"MEX","Year":2018,"Internet_usage":56.6596,"population":124573711,"x":2018,"y":56.6596},{"X":2751,"country_name":"Mexico","country_code":"MEX","Year":2019,"Internet_usage":69.63209999999999,"population":125762982,"x":2019,"y":69.63209999999999},{"X":2752,"country_name":"Mexico","country_code":"MEX","Year":2020,"Internet_usage":71.4902,"population":126799054,"x":2020,"y":71.4902},{"X":2753,"country_name":"Mexico","country_code":"MEX","Year":2021,"Internet_usage":75.62649999999999,"population":127648148,"x":2021,"y":75.62649999999999},{"X":2754,"country_name":"Mexico","country_code":"MEX","Year":2022,"Internet_usage":78.6322,"population":128613117,"x":2022,"y":78.6322},{"X":2755,"country_name":"Mexico","country_code":"MEX","Year":2023,"Internet_usage":81.1832,"population":129739759,"x":2023,"y":81.1832}],"type":"line"},{"name":"Paraguay","data":[{"X":3255,"country_name":"Paraguay","country_code":"PRY","Year":2000,"Internet_usage":0.747631,"population":5100868,"x":2000,"y":0.747631},{"X":3256,"country_name":"Paraguay","country_code":"PRY","Year":2001,"Internet_usage":1.09879,"population":5187689,"x":2001,"y":1.09879},{"X":3257,"country_name":"Paraguay","country_code":"PRY","Year":2002,"Internet_usage":1.79497,"population":5261328,"x":2002,"y":1.79497},{"X":3258,"country_name":"Paraguay","country_code":"PRY","Year":2003,"Internet_usage":2.11194,"population":5326436,"x":2003,"y":2.11194},{"X":3259,"country_name":"Paraguay","country_code":"PRY","Year":2004,"Internet_usage":3.45244,"population":5388175,"x":2004,"y":3.45244},{"X":3260,"country_name":"Paraguay","country_code":"PRY","Year":2005,"Internet_usage":7.90701,"population":5448097,"x":2005,"y":7.90701},{"X":3261,"country_name":"Paraguay","country_code":"PRY","Year":2006,"Internet_usage":7.96207,"population":5505148,"x":2006,"y":7.96207},{"X":3262,"country_name":"Paraguay","country_code":"PRY","Year":2007,"Internet_usage":11.21,"population":5559386,"x":2007,"y":11.21},{"X":3263,"country_name":"Paraguay","country_code":"PRY","Year":2008,"Internet_usage":14.27,"population":5613574,"x":2008,"y":14.27},{"X":3264,"country_name":"Paraguay","country_code":"PRY","Year":2009,"Internet_usage":18.9,"population":5671236,"x":2009,"y":18.9},{"X":3265,"country_name":"Paraguay","country_code":"PRY","Year":2010,"Internet_usage":19.8,"population":5737971,"x":2010,"y":19.8},{"X":3266,"country_name":"Paraguay","country_code":"PRY","Year":2011,"Internet_usage":24.7635,"population":5814626,"x":2011,"y":24.7635},{"X":3267,"country_name":"Paraguay","country_code":"PRY","Year":2012,"Internet_usage":29.34,"population":5897008,"x":2012,"y":29.34},{"X":3268,"country_name":"Paraguay","country_code":"PRY","Year":2013,"Internet_usage":36.9,"population":5982445,"x":2013,"y":36.9},{"X":3269,"country_name":"Paraguay","country_code":"PRY","Year":2014,"Internet_usage":43.0074,"population":6069811,"x":2014,"y":43.0074},{"X":3270,"country_name":"Paraguay","country_code":"PRY","Year":2015,"Internet_usage":49.7163,"population":6159103,"x":2015,"y":49.7163},{"X":3271,"country_name":"Paraguay","country_code":"PRY","Year":2016,"Internet_usage":53.4041,"population":6249126,"x":2016,"y":53.4041},{"X":3272,"country_name":"Paraguay","country_code":"PRY","Year":2017,"Internet_usage":61.0758,"population":6338660,"x":2017,"y":61.0758},{"X":3273,"country_name":"Paraguay","country_code":"PRY","Year":2018,"Internet_usage":64.9935,"population":6427382,"x":2018,"y":64.9935},{"X":3274,"country_name":"Paraguay","country_code":"PRY","Year":2019,"Internet_usage":68.5176,"population":6515058,"x":2019,"y":68.5176},{"X":3275,"country_name":"Paraguay","country_code":"PRY","Year":2020,"Internet_usage":73.9575,"population":6603739,"x":2020,"y":73.9575},{"X":3276,"country_name":"Paraguay","country_code":"PRY","Year":2021,"Internet_usage":77.0184,"population":6684182,"x":2021,"y":77.0184},{"X":3277,"country_name":"Paraguay","country_code":"PRY","Year":2022,"Internet_usage":76.25920000000001,"population":6760464,"x":2022,"y":76.25920000000001},{"X":3278,"country_name":"Paraguay","country_code":"PRY","Year":2023,"Internet_usage":78.09480000000001,"population":6844146,"x":2023,"y":78.09480000000001}],"type":"line"},{"name":"Viet Nam","data":[{"X":4471,"country_name":"Viet Nam","country_code":"VNM","Year":2000,"Internet_usage":0.254248,"population":77154011,"x":2000,"y":0.254248},{"X":4472,"country_name":"Viet Nam","country_code":"VNM","Year":2001,"Internet_usage":1.26565,"population":77969361,"x":2001,"y":1.26565},{"X":4473,"country_name":"Viet Nam","country_code":"VNM","Year":2002,"Internet_usage":1.855,"population":78772224,"x":2002,"y":1.855},{"X":4474,"country_name":"Viet Nam","country_code":"VNM","Year":2003,"Internet_usage":3.78028,"population":79563777,"x":2003,"y":3.78028},{"X":4475,"country_name":"Viet Nam","country_code":"VNM","Year":2004,"Internet_usage":7.64241,"population":80338971,"x":2004,"y":7.64241},{"X":4476,"country_name":"Viet Nam","country_code":"VNM","Year":2005,"Internet_usage":12.7399,"population":81088313,"x":2005,"y":12.7399},{"X":4477,"country_name":"Viet Nam","country_code":"VNM","Year":2006,"Internet_usage":17.2546,"population":82167897,"x":2006,"y":17.2546},{"X":4478,"country_name":"Viet Nam","country_code":"VNM","Year":2007,"Internet_usage":20.7554,"population":83633375,"x":2007,"y":20.7554},{"X":4479,"country_name":"Viet Nam","country_code":"VNM","Year":2008,"Internet_usage":23.92,"population":85175788,"x":2008,"y":23.92},{"X":4480,"country_name":"Viet Nam","country_code":"VNM","Year":2009,"Internet_usage":26.55,"population":86460018,"x":2009,"y":26.55},{"X":4481,"country_name":"Viet Nam","country_code":"VNM","Year":2010,"Internet_usage":30.65,"population":87455152,"x":2010,"y":30.65},{"X":4482,"country_name":"Viet Nam","country_code":"VNM","Year":2011,"Internet_usage":35.07,"population":88468314,"x":2011,"y":35.07},{"X":4483,"country_name":"Viet Nam","country_code":"VNM","Year":2012,"Internet_usage":36.8,"population":89510356,"x":2012,"y":36.8},{"X":4484,"country_name":"Viet Nam","country_code":"VNM","Year":2013,"Internet_usage":38.5,"population":90573104,"x":2013,"y":38.5},{"X":4485,"country_name":"Viet Nam","country_code":"VNM","Year":2014,"Internet_usage":41,"population":91679578,"x":2014,"y":41},{"X":4486,"country_name":"Viet Nam","country_code":"VNM","Year":2015,"Internet_usage":45,"population":92823254,"x":2015,"y":45},{"X":4487,"country_name":"Viet Nam","country_code":"VNM","Year":2016,"Internet_usage":53,"population":94000117,"x":2016,"y":53},{"X":4488,"country_name":"Viet Nam","country_code":"VNM","Year":2017,"Internet_usage":58.14,"population":95176977,"x":2017,"y":58.14},{"X":4489,"country_name":"Viet Nam","country_code":"VNM","Year":2018,"Internet_usage":69.8479,"population":96237319,"x":2018,"y":69.8479},{"X":4490,"country_name":"Viet Nam","country_code":"VNM","Year":2019,"Internet_usage":68.66160000000001,"population":97173776,"x":2019,"y":68.66160000000001},{"X":4491,"country_name":"Viet Nam","country_code":"VNM","Year":2020,"Internet_usage":70.3,"population":98079191,"x":2020,"y":70.3},{"X":4492,"country_name":"Viet Nam","country_code":"VNM","Year":2021,"Internet_usage":74.20999999999999,"population":98935098,"x":2021,"y":74.20999999999999},{"X":4493,"country_name":"Viet Nam","country_code":"VNM","Year":2022,"Internet_usage":78.59,"population":99680655,"x":2022,"y":78.59},{"X":4494,"country_name":"Viet Nam","country_code":"VNM","Year":2023,"Internet_usage":78.08,"population":100352192,"x":2023,"y":78.08}],"type":"line"}],"xAxis":{"type":"linear","title":{"text":"Year","style":{"fontFamily":"Lato","fontSize":"14px"}},"lineColor":"#333333"},"legend":{"itemStyle":{"fontFamily":"Lato","fontSize":"12px","color":"#333333"}},"colors":["#E31A1C","#1F78B4","#33A02C","#FF7F00","#6A3D9A","#B15928"]},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":"Lato","debug":false},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>Countries such as Malawi, Bangladesh, Indonesia, and Ecuador exhibit some of the lowest internet penetration rates.</p>
+<p>China, despite its technological advancements, ranks lower due to its vast rural population where digital access remains a challenge.</p>
+<p>Several Latin American countries, including Mexico and Paraguay, still face significant accessibility barriers.</p>
+</section>
+<section id="patterns-among-the-top-and-bottom-10-countries" class="level3">
+<h3 class="anchored" data-anchor-id="patterns-among-the-top-and-bottom-10-countries">Patterns Among the Top and Bottom 10 Countries</h3>
+<p>Top 10 Countries: Exhibit a concave growth pattern, where rapid early adoption led to saturation in later years. Bottom 10 Countries: Show a convex growth pattern, characterized by slower initial adoption followed by accelerated growth as infrastructure improved.</p>
+</section>
+<section id="when-will-we-reach-100-internet-access-a-forecasting-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="when-will-we-reach-100-internet-access-a-forecasting-analysis">When Will We Reach 100% Internet Access? A Forecasting Analysis</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div class="highchart html-widget html-fill-item" id="htmlwidget-36b43b1852eae3f4f8c2" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-36b43b1852eae3f4f8c2">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":"Internet Penetration: Early vs. Late Adopters"},"yAxis":{"title":{"text":"Weighted Internet Penetration (%)"},"max":100},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0},"treemap":{"layoutAlgorithm":"squarified"}},"xAxis":{"title":{"text":"Year"}},"series":[{"group":"group","data":[{"Year":2000,"weighted_avg":44.32324773675104,"x":2000,"y":44.32324773675104},{"Year":2001,"weighted_avg":51.26723703857638,"x":2001,"y":51.26723703857638},{"Year":2002,"weighted_avg":59.64793681916775,"x":2002,"y":59.64793681916775},{"Year":2003,"weighted_avg":63.06571719759665,"x":2003,"y":63.06571719759665},{"Year":2004,"weighted_avg":66.51405630906666,"x":2004,"y":66.51405630906666},{"Year":2005,"weighted_avg":69.59752814766247,"x":2005,"y":69.59752814766247},{"Year":2006,"weighted_avg":71.26018933449464,"x":2006,"y":71.26018933449464},{"Year":2007,"weighted_avg":75.68587033469625,"x":2007,"y":75.68587033469625},{"Year":2008,"weighted_avg":75.92555699088183,"x":2008,"y":75.92555699088183},{"Year":2009,"weighted_avg":74.57722476384693,"x":2009,"y":74.57722476384693},{"Year":2010,"weighted_avg":75.43875610342224,"x":2010,"y":75.43875610342224},{"Year":2011,"weighted_avg":74.60663879945555,"x":2011,"y":74.60663879945555},{"Year":2012,"weighted_avg":78.04918179600763,"x":2012,"y":78.04918179600763},{"Year":2013,"weighted_avg":76.43822495330838,"x":2013,"y":76.43822495330838},{"Year":2014,"weighted_avg":77.79654866462195,"x":2014,"y":77.79654866462195},{"Year":2015,"weighted_avg":79.38560201478398,"x":2015,"y":79.38560201478398},{"Year":2016,"weighted_avg":87.26376879392402,"x":2016,"y":87.26376879392402},{"Year":2017,"weighted_avg":88.95748490009412,"x":2017,"y":88.95748490009412},{"Year":2018,"weighted_avg":90.13372600511924,"x":2018,"y":90.13372600511924},{"Year":2019,"weighted_avg":90.95882260499351,"x":2019,"y":90.95882260499351},{"Year":2020,"weighted_avg":95.8418162026481,"x":2020,"y":95.8418162026481},{"Year":2021,"weighted_avg":96.28174072118783,"x":2021,"y":96.28174072118783},{"Year":2022,"weighted_avg":96.56456614559822,"x":2022,"y":96.56456614559822},{"Year":2023,"weighted_avg":97.23347576081868,"x":2023,"y":97.23347576081868}],"type":"line","name":"Early Adopters (>40% in 2000)","color":"#1F78B4"},{"group":"group","data":[{"Year":2000,"weighted_avg":3.759022514212801,"x":2000,"y":3.759022514212801},{"Year":2001,"weighted_avg":4.772675006908702,"x":2001,"y":4.772675006908702},{"Year":2002,"weighted_avg":6.940710481537987,"x":2002,"y":6.940710481537987},{"Year":2003,"weighted_avg":8.484131171783977,"x":2003,"y":8.484131171783977},{"Year":2004,"weighted_avg":10.27500750179213,"x":2004,"y":10.27500750179213},{"Year":2005,"weighted_avg":11.59281896778696,"x":2005,"y":11.59281896778696},{"Year":2006,"weighted_avg":13.32337485630991,"x":2006,"y":13.32337485630991},{"Year":2007,"weighted_avg":16.18438147551324,"x":2007,"y":16.18438147551324},{"Year":2008,"weighted_avg":18.97744411926045,"x":2008,"y":18.97744411926045},{"Year":2009,"weighted_avg":21.79307542025142,"x":2009,"y":21.79307542025142},{"Year":2010,"weighted_avg":25.19489277952731,"x":2010,"y":25.19489277952731},{"Year":2011,"weighted_avg":27.83656522342172,"x":2011,"y":27.83656522342172},{"Year":2012,"weighted_avg":30.26631247026472,"x":2012,"y":30.26631247026472},{"Year":2013,"weighted_avg":32.47469243565292,"x":2013,"y":32.47469243565292},{"Year":2014,"weighted_avg":34.79062561909485,"x":2014,"y":34.79062561909485},{"Year":2015,"weighted_avg":37.26523862030842,"x":2015,"y":37.26523862030842},{"Year":2016,"weighted_avg":39.83162723252301,"x":2016,"y":39.83162723252301},{"Year":2017,"weighted_avg":42.21548194713341,"x":2017,"y":42.21548194713341},{"Year":2018,"weighted_avg":45.71042547933239,"x":2018,"y":45.71042547933239},{"Year":2019,"weighted_avg":50.5218910937666,"x":2019,"y":50.5218910937666},{"Year":2020,"weighted_avg":56.39203509984844,"x":2020,"y":56.39203509984844},{"Year":2021,"weighted_avg":62.84338186921271,"x":2021,"y":62.84338186921271},{"Year":2022,"weighted_avg":66.17254971831888,"x":2022,"y":66.17254971831888},{"Year":2023,"weighted_avg":79.09684007584389,"x":2023,"y":79.09684007584389}],"type":"line","name":"Late Adopters (<40% in 2000)","color":"#E31A1C","dashStyle":"Dash"}],"tooltip":{"shared":true,"valueDecimals":2}},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>For this estimation, we set specific conditions to ensure an accurate and meaningful prediction. We separated countries that had internet penetration rates above 40% in the year 2000 to differentiate between early adopters and late adopters.</p>
+<p>Additionally, we used a weighted average approach, giving more importance to countries with larger populations, ensuring that the global penetration trend is not biased by smaller nations. This method provides a more accurate representation of real-world adoption.</p>
+<p>The comparison between early adopters and late adopters reveals distinct patterns in internet penetration growth. Early adopters, which had over 40% penetration in 2000, experienced a rapid initial surge in adoption, followed by a plateau as penetration neared saturation levels. In contrast, late adopters—those with less than 40% penetration in 2000—followed a slower, steadier growth trajectory. Their adoption rates increased gradually over the years, with a modest acceleration in the last decade, likely driven by factors such as mobile internet expansion, cheaper smartphones, and global digital inclusion efforts.</p>
+<p>However, unlike early adopters, who experienced a clear S-curve pattern, late adopters faced persistent barriers—including infrastructure limitations, affordability issues, and regulatory challenges—that kept their growth relatively constrained. This suggests that, for many late-adopting nations, the process of expanding internet access has been a long, incremental journey rather than a rapid transformation, reinforcing the reality that overcoming the digital divide takes decades of sustained effort.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="highchart html-widget html-fill-item" id="htmlwidget-d874e8603a2ddcfc6c11" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-d874e8603a2ddcfc6c11">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":"Forecast of Global Internet Penetration (Logistic Growth)"},"yAxis":{"title":{"text":"Internet Usage (%)"},"max":100},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0},"treemap":{"layoutAlgorithm":"squarified"}},"xAxis":{"title":{"text":"Year"}},"series":[{"group":"group","data":[{"Year":2000,"Internet_usage":44.32324773675104,"x":2000,"y":44.32324773675104},{"Year":2001,"Internet_usage":51.26723703857638,"x":2001,"y":51.26723703857638},{"Year":2002,"Internet_usage":59.64793681916775,"x":2002,"y":59.64793681916775},{"Year":2003,"Internet_usage":63.06571719759665,"x":2003,"y":63.06571719759665},{"Year":2004,"Internet_usage":66.51405630906666,"x":2004,"y":66.51405630906666},{"Year":2005,"Internet_usage":69.59752814766247,"x":2005,"y":69.59752814766247},{"Year":2006,"Internet_usage":71.26018933449464,"x":2006,"y":71.26018933449464},{"Year":2007,"Internet_usage":75.68587033469625,"x":2007,"y":75.68587033469625},{"Year":2008,"Internet_usage":75.92555699088183,"x":2008,"y":75.92555699088183},{"Year":2009,"Internet_usage":74.57722476384693,"x":2009,"y":74.57722476384693},{"Year":2010,"Internet_usage":75.43875610342224,"x":2010,"y":75.43875610342224},{"Year":2011,"Internet_usage":74.60663879945555,"x":2011,"y":74.60663879945555},{"Year":2012,"Internet_usage":78.04918179600763,"x":2012,"y":78.04918179600763},{"Year":2013,"Internet_usage":76.43822495330838,"x":2013,"y":76.43822495330838},{"Year":2014,"Internet_usage":77.79654866462195,"x":2014,"y":77.79654866462195},{"Year":2015,"Internet_usage":79.38560201478398,"x":2015,"y":79.38560201478398},{"Year":2016,"Internet_usage":87.26376879392402,"x":2016,"y":87.26376879392402},{"Year":2017,"Internet_usage":88.95748490009412,"x":2017,"y":88.95748490009412},{"Year":2018,"Internet_usage":90.13372600511924,"x":2018,"y":90.13372600511924},{"Year":2019,"Internet_usage":90.95882260499351,"x":2019,"y":90.95882260499351},{"Year":2020,"Internet_usage":95.8418162026481,"x":2020,"y":95.8418162026481},{"Year":2021,"Internet_usage":96.28174072118783,"x":2021,"y":96.28174072118783},{"Year":2022,"Internet_usage":96.56456614559822,"x":2022,"y":96.56456614559822},{"Year":2023,"Internet_usage":97.23347576081868,"x":2023,"y":97.23347576081868}],"type":"line","name":"Observed Data early adopters","color":"#1F78B4"},{"group":"group","data":[{"Year":2000,"Internet_usage":3.759022514212801,"x":2000,"y":3.759022514212801},{"Year":2001,"Internet_usage":4.772675006908702,"x":2001,"y":4.772675006908702},{"Year":2002,"Internet_usage":6.940710481537987,"x":2002,"y":6.940710481537987},{"Year":2003,"Internet_usage":8.484131171783977,"x":2003,"y":8.484131171783977},{"Year":2004,"Internet_usage":10.27500750179213,"x":2004,"y":10.27500750179213},{"Year":2005,"Internet_usage":11.59281896778696,"x":2005,"y":11.59281896778696},{"Year":2006,"Internet_usage":13.32337485630991,"x":2006,"y":13.32337485630991},{"Year":2007,"Internet_usage":16.18438147551324,"x":2007,"y":16.18438147551324},{"Year":2008,"Internet_usage":18.97744411926045,"x":2008,"y":18.97744411926045},{"Year":2009,"Internet_usage":21.79307542025142,"x":2009,"y":21.79307542025142},{"Year":2010,"Internet_usage":25.19489277952731,"x":2010,"y":25.19489277952731},{"Year":2011,"Internet_usage":27.83656522342172,"x":2011,"y":27.83656522342172},{"Year":2012,"Internet_usage":30.26631247026472,"x":2012,"y":30.26631247026472},{"Year":2013,"Internet_usage":32.47469243565292,"x":2013,"y":32.47469243565292},{"Year":2014,"Internet_usage":34.79062561909485,"x":2014,"y":34.79062561909485},{"Year":2015,"Internet_usage":37.26523862030842,"x":2015,"y":37.26523862030842},{"Year":2016,"Internet_usage":39.83162723252301,"x":2016,"y":39.83162723252301},{"Year":2017,"Internet_usage":42.21548194713341,"x":2017,"y":42.21548194713341},{"Year":2018,"Internet_usage":45.71042547933239,"x":2018,"y":45.71042547933239},{"Year":2019,"Internet_usage":50.5218910937666,"x":2019,"y":50.5218910937666},{"Year":2020,"Internet_usage":56.39203509984844,"x":2020,"y":56.39203509984844},{"Year":2021,"Internet_usage":62.84338186921271,"x":2021,"y":62.84338186921271},{"Year":2022,"Internet_usage":66.17254971831888,"x":2022,"y":66.17254971831888},{"Year":2023,"Internet_usage":79.09684007584389,"x":2023,"y":79.09684007584389}],"type":"line","name":"Observed Data late adopters","color":"#1F78B4"},{"group":"group","data":[{"Year":2024,"Internet_usage":94.4444059934969,"x":2024,"y":94.4444059934969},{"Year":2025,"Internet_usage":95.01996227970602,"x":2025,"y":95.01996227970602},{"Year":2026,"Internet_usage":95.53870789985417,"x":2026,"y":95.53870789985417},{"Year":2027,"Internet_usage":96.00568983343773,"x":2027,"y":96.00568983343773},{"Year":2028,"Internet_usage":96.42561961030908,"x":2028,"y":96.42561961030908},{"Year":2029,"Internet_usage":96.80287152812618,"x":2029,"y":96.80287152812618},{"Year":2030,"Internet_usage":97.14148737923668,"x":2030,"y":97.14148737923668},{"Year":2031,"Internet_usage":97.44518609160561,"x":2031,"y":97.44518609160561},{"Year":2032,"Internet_usage":97.71737694020065,"x":2032,"y":97.71737694020065},{"Year":2033,"Internet_usage":97.96117521843415,"x":2033,"y":97.96117521843415},{"Year":2034,"Internet_usage":98.17941946865187,"x":2034,"y":98.17941946865187},{"Year":2035,"Internet_usage":98.3746895541026,"x":2035,"y":98.3746895541026},{"Year":2036,"Internet_usage":98.54932501224225,"x":2036,"y":98.54932501224225},{"Year":2037,"Internet_usage":98.70544326190516,"x":2037,"y":98.70544326190516},{"Year":2038,"Internet_usage":98.84495734690034,"x":2038,"y":98.84495734690034},{"Year":2039,"Internet_usage":98.96959298844699,"x":2039,"y":98.96959298844699},{"Year":2040,"Internet_usage":99.08090479117176,"x":2040,"y":99.08090479117176},{"Year":2041,"Internet_usage":99.18029150470342,"x":2041,"y":99.18029150470342},{"Year":2042,"Internet_usage":99.26901028760689,"x":2042,"y":99.26901028760689},{"Year":2043,"Internet_usage":99.34818995465406,"x":2043,"y":99.34818995465406},{"Year":2044,"Internet_usage":99.41884321413123,"x":2044,"y":99.41884321413123},{"Year":2045,"Internet_usage":99.48187792067063,"x":2045,"y":99.48187792067063},{"Year":2046,"Internet_usage":99.53810738235894,"x":2046,"y":99.53810738235894},{"Year":2047,"Internet_usage":99.58825976978343,"x":2047,"y":99.58825976978343},{"Year":2048,"Internet_usage":99.63298668019128,"x":2048,"y":99.63298668019128},{"Year":2049,"Internet_usage":99.672870912848,"x":2049,"y":99.672870912848},{"Year":2050,"Internet_usage":99.70843351262631,"x":2050,"y":99.70843351262631},{"Year":2051,"Internet_usage":99.74014013834865,"x":2051,"y":99.74014013834865},{"Year":2052,"Internet_usage":99.76840681085213,"x":2052,"y":99.76840681085213},{"Year":2053,"Internet_usage":99.79360509346398,"x":2053,"y":99.79360509346398},{"Year":2054,"Internet_usage":99.81606675481591,"x":2054,"y":99.81606675481591},{"Year":2055,"Internet_usage":99.83608796087978,"x":2055,"y":99.83608796087978},{"Year":2056,"Internet_usage":99.85393303991766,"x":2056,"y":99.85393303991766},{"Year":2057,"Internet_usage":99.86983786081572,"x":2057,"y":99.86983786081572},{"Year":2058,"Internet_usage":99.88401286209175,"x":2058,"y":99.88401286209175},{"Year":2059,"Internet_usage":99.89664576578531,"x":2059,"y":99.89664576578531},{"Year":2060,"Internet_usage":99.90790400749729,"x":2060,"y":99.90790400749729}],"type":"line","name":"Forecast -  early adopters","dashStyle":"Dash","color":"#E31A1C"},{"group":"group","data":[{"Year":2024,"Internet_usage":72.29088877241709,"x":2024,"y":72.29088877241709},{"Year":2025,"Internet_usage":75.33502317024494,"x":2025,"y":75.33502317024494},{"Year":2026,"Internet_usage":78.14582879372699,"x":2026,"y":78.14582879372699},{"Year":2027,"Internet_usage":80.71830076910152,"x":2027,"y":80.71830076910152},{"Year":2028,"Internet_usage":83.05363059736761,"x":2028,"y":83.05363059736761},{"Year":2029,"Internet_usage":85.15812144796061,"x":2029,"y":85.15812144796061},{"Year":2030,"Internet_usage":87.04204049668969,"x":2030,"y":87.04204049668969},{"Year":2031,"Internet_usage":88.71850803467399,"x":2031,"y":88.71850803467399},{"Year":2032,"Internet_usage":90.20249257774847,"x":2032,"y":90.20249257774847},{"Year":2033,"Internet_usage":91.50995203026399,"x":2033,"y":91.50995203026399},{"Year":2034,"Internet_usage":92.65713666036771,"x":2034,"y":92.65713666036771},{"Year":2035,"Internet_usage":93.660051688409,"x":2035,"y":93.660051688409},{"Year":2036,"Internet_usage":94.53406561648394,"x":2036,"y":94.53406561648394},{"Year":2037,"Internet_usage":95.29364409153276,"x":2037,"y":95.29364409153276},{"Year":2038,"Internet_usage":95.9521867977911,"x":2038,"y":95.9521867977911},{"Year":2039,"Internet_usage":96.52194531894062,"x":2039,"y":96.52194531894062},{"Year":2040,"Internet_usage":97.01400199245651,"x":2040,"y":97.01400199245651},{"Year":2041,"Internet_usage":97.43829266012524,"x":2041,"y":97.43829266012524},{"Year":2042,"Internet_usage":97.80365932190091,"x":2042,"y":97.80365932190091},{"Year":2043,"Internet_usage":98.11792166623586,"x":2043,"y":98.11792166623586},{"Year":2044,"Internet_usage":98.38795908463881,"x":2044,"y":98.38795908463881},{"Year":2045,"Internet_usage":98.61979700108867,"x":2045,"y":98.61979700108867},{"Year":2046,"Internet_usage":98.81869314953539,"x":2046,"y":98.81869314953539},{"Year":2047,"Internet_usage":98.98922084726155,"x":2047,"y":98.98922084726155},{"Year":2048,"Internet_usage":99.13534738997288,"x":2048,"y":99.13534738997288},{"Year":2049,"Internet_usage":99.26050649358467,"x":2049,"y":99.26050649358467},{"Year":2050,"Internet_usage":99.36766428319002,"x":2050,"y":99.36766428319002},{"Year":2051,"Internet_usage":99.45937873100402,"x":2051,"y":99.45937873100402},{"Year":2052,"Internet_usage":99.53785271392705,"x":2052,"y":99.53785271392705},{"Year":2053,"Internet_usage":99.6049810317832,"x":2053,"y":99.6049810317832},{"Year":2054,"Internet_usage":99.6623918261956,"x":2054,"y":99.6623918261956},{"Year":2055,"Internet_usage":99.71148288828101,"x":2055,"y":99.71148288828101},{"Year":2056,"Internet_usage":99.75345335664709,"x":2056,"y":99.75345335664709},{"Year":2057,"Internet_usage":99.78933129727767,"x":2057,"y":99.78933129727767},{"Year":2058,"Internet_usage":99.81999763234219,"x":2058,"y":99.81999763234219},{"Year":2059,"Internet_usage":99.84620685188376,"x":2059,"y":99.84620685188376},{"Year":2060,"Internet_usage":99.86860490501167,"x":2060,"y":99.86860490501167}],"type":"line","name":"Forecast - late adopters","dashStyle":"Dash","color":"#E31A1C"},{"data":[{"x":2046,"y":99.53810738235894}],"type":"scatter","name":"100% Internet Access - early adopters","color":"green","marker":{"symbol":"circle","radius":6}},{"data":[{"x":2052,"y":99.53785271392705}],"type":"scatter","name":"100% Internet Access - late adopters","color":"darkgreen","marker":{"symbol":"circle","radius":6}}]},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>Our analysis separates internet adoption trends into two groups: early adopters and late adopters. The distinction is necessary because these groups exhibit different adoption behaviors that impact long-term projections.</p>
+<p><strong>Why Two Models?</strong></p>
+<p>Our analysis differentiates between early adopters and late adopters because their internet adoption patterns follow distinct trajectories. Early adopters benefited from better infrastructure, economic growth, and technological accessibility, allowing them to reach high penetration levels more quickly. In contrast, late adopters have faced slower adoption rates due to challenges such as limited infrastructure, affordability constraints, and restrictive policies. Using a logistic growth model, we estimate that early adopters will reach 99.5% penetration by 2046, while late adopters will achieve the same level by 2052. Although this difference is not substantial, it underscores the increasing difficulty of expanding internet access to the last 0.5% of the population. Reaching full global penetration remains a significant challenge due to persistent geographic, economic, and political barriers that slow the final stages of connectivity.</p>
+<p><strong>Factors Influencing the Adoption Curve</strong></p>
+<ul>
+<li><p><strong>Infrastructure &amp; Cost:</strong></p>
+<p>Urban areas reached high penetration quickly due to fiber-optic and broadband expansions. Rural &amp; remote regions still face high infrastructure costs (fiber-optic installation, satellite access). New solutions like low-orbit satellites (e.g., Starlink) can accelerate adoption, but affordability remains a concern.</p></li>
+<li><p><strong>Regulation &amp; Government Control:</strong></p>
+<p>Some countries limit access due to political concerns, slowing adoption in certain regions. Policy-driven initiatives (e.g., subsidies for internet access, regulatory reforms) will determine the speed of further expansion.</p></li>
+<li><p><strong>Affordability &amp; Digital Literacy:</strong></p>
+<p>Expanding access does not guarantee usage—many people cannot afford devices or lack digital literacy. Mobile internet and affordable smartphones have helped, but further education and pricing policies are needed.</p></li>
+</ul>
+<p><strong>How Our Model Compares to Official Projections</strong></p>
+<p>United Nations (ITU): Estimates 66% global penetration in 2023 and anticipates major challenges in reaching the last 10-15%.</p>
+<p>World Bank &amp; UN Projections: Suggest universal access by 2060 (assuming steady investments).</p>
+<p>Our Model: Forecasts near-universal access by 2052 for late adopters, slightly ahead of these estimates but aligned with current trends.</p>
+<p><strong>What Could Accelerate or Delay Full Internet Access?</strong></p>
+<p>Several factors could either accelerate or delay the path to full global internet penetration. On the acceleration side, declining mobile internet costs, continuous advancements in satellite technology, and proactive government policies aimed at digital inclusion could significantly speed up adoption. However, certain obstacles remain, including political restrictions that limit access in some regions, economic downturns that may reduce infrastructure investments, and persistent gaps in digital literacy and affordability that hinder widespread usage. While the world is on course to reach 99.5% internet penetration, achieving 100% connectivity remains uncertain. Geographic isolation, financial constraints, and regulatory barriers may prevent complete global coverage. Nonetheless, as internet access becomes a necessity rather than a luxury, the digital divide will continue to narrow over time.</p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

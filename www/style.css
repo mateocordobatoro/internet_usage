@@ -1,0 +1,92 @@
+body {
+  background-color: #caf0f8;
+}
+
+/* Estilo para el título principal */
+h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    text-align: center;
+    color: #1E3A8A; /* Azul oscuro */
+    margin-top: 20px;
+    text-transform: uppercase;
+}
+
+/* Estilo para el subtítulo */
+h2 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+    text-align: center;
+    color: #374151; /* Gris oscuro */
+    margin-top: 5px;
+    margin-bottom: 30px;
+    font-style: italic;
+}
+
+
+
+
+#title-container {
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+  color: #c83200; /* Verde oscuro */
+  margin-bottom: 20px;
+  font-family: "Boogaloo";
+}
+
+#year {
+        position: absolute;
+        bottom: 20px; /* Distancia desde la parte inferior */
+        left: 20px; /* Distancia desde la izquierda */
+        background: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente */
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+      }
+
+
+#float-container{
+    display: none;
+    position: fixed; /* Se mantiene fijo en la pantalla */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Lo centra completamente */
+    width: 80%;
+    padding: 20px;
+    background: rgba(1, 0, 0, 0); /* Completamente transparente */
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+    z-index: 9999; /* Asegura que esté por encima de todo */
+    box-shadow: none; /* Elimina cualquier sombra */
+    backdrop-filter: blur(10px);
+}  
+
+#map-container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 80%;
+  margin: 0 auto;
+}
+
+#map-wrapper {
+  border-radius: 15px;
+  overflow: hidden;
+  /*display: flex;*/
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}  
+
+@media (min-width: 1300px) {
+  #map-wrapper {
+    display: flex; /* Alinear verticalmente */
+    text-align: center; /* Opcional: Centra el contenido */
+  }
+}

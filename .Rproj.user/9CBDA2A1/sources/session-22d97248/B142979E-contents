@@ -1,0 +1,85 @@
+
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+
+
+data <- readr::read_csv('internet_usage.csv', show_col_types = FALSE)
+head(data)
+
+
+continents <- read.csv("https://gist.githubusercontent.com/stevewithington/20a69c0b6d2ff846ea5d35e5fc47f26c/raw/13716ceb2f22b5643ce5e7039643c86a0e0c6da6/country-and-continent-codes-list-csv.csv")
+
+data$`2000`[1:10]== ".."
+
+
+# change missing missing mvalues "..2 for NA 
+
+data <- data %>% 
+  mutate(across(everything(), ~na_if(.,"..")))
+
+data <- data %>%
+  pivot_longer(cols = -c(`Country Name`,`Country Code`), names_to = "Year", values_to = "Internet_usage") %>% 
+  rename(country_name = `Country Name`,
+         country_code= `Country Code`)
+
+
+data <- data %>% 
+  mutate(Year = as.numeric(Year),
+         Internet_usage = as.double(Internet_usage))
+
+
+# delting missing values 
+
+
+data <- data %>% 
+  filter(!is.na(Internet_usage))
+
+
+write.csv(data, "data_long.csv", ro)
+
+readr::write_csv(data,"data_long.csv")
+
+
+
+overall_plot <- data %>% 
+  group_by(Year) %>% 
+  summarise(total_internet_usage = sum(Internet_usage, na.rm = TRUE)) %>% 
+  ggplot(aes(x = Year, y = total_internet_usage)) +
+  geom_line(size = 1) +
+  geom_point() +
+  labs(
+    title = "Internet Usage Over the Years",
+    x = "Year",
+    y = "Internet Usage (%)"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none") 
+
+
+overall_plot
+
+
+
+data %>% 
+  arrange(Country_name, Year) %>% 
+  group_by(Country_name) %>% 
+  filter(Internet_usage < lag(Internet_usage)) %>% 
+  ungroup() %>% 
+  distinct(Country_name)
+
+  filter(Year %in% c(2018, 2022))
+
+
+  ggplot(aes(x = Year, y = Internet_usage)) +
+  geom_point()
+
+
+data %>% filter(Country_name == "Colombia") %>% arrange(desc(Year))
+
+
+
+
+
+

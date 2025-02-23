@@ -1,0 +1,3 @@
+"0","influential_points2 <- which(cooksd2 > 4/(length(residuals(vif_model2))))"
+"0",""
+"0",""
